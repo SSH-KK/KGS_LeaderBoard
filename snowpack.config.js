@@ -20,6 +20,7 @@ module.exports = {
   alias:{
     "@styles":"./src/styles",
     "@types":"./src/types",
-    "@utils":"./src/urils"
+    "@utils":"./src/urils",
+    "@components":"./src/components",
   }
 };

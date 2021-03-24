@@ -1,11 +1,16 @@
 import React from 'react'
-import styles from '@styles/App.module.css'
+import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
+import Navbar from '@components/Navbar'
+import Top from '@components/Top'
 
 const App: React.FC = () => {
   return (
-    <>
-      <h1 className={styles.title}>adwaawd</h1>
-    </>
+    <BrowserRouter>
+      <Navbar />
+      <Switch>
+        <Route exact path="/top" render={() => <Top />} />
+      </Switch>
+    </BrowserRouter>
   )
 }
 export default App

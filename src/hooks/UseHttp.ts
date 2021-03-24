@@ -8,7 +8,11 @@ const UseHttp = () => {
     async (url, method = 'GET', body = null, headers = {}) => {
       setLoading(true)
       try {
-        const res = await fetch(url, { method, body, headers })
+        const res = await fetch(url, {
+          method,
+          body,
+          headers: { 'Content-Type': 'application/json', ...headers },
+        })
         const data = await res.json()
         if (!res.ok) {
           throw new Error(data.error || 'Somthing goes wrong')
@@ -25,3 +29,5 @@ const UseHttp = () => {
 
   return { request, loading, error }
 }
+
+export default UseHttp

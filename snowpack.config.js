@@ -19,8 +19,9 @@ module.exports = {
   },
   alias:{
     "@styles":"./src/styles",
-    "@types":"./src/types",
+    "@type":"./src/types",
     "@utils":"./src/urils",
     "@components":"./src/components",
+    "@hooks":"./src/hooks",
   }
 };

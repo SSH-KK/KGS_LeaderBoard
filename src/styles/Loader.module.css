@@ -1,0 +1,6 @@
+.loader {
+  top: 40vh;
+  position: absolute;
+  height: 20vh !important;
+  width: 20vh !important;
+}

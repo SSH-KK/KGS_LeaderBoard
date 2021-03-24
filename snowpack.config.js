@@ -1,8 +1,7 @@
-/** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
   mount: {
     public: { url: '/', static: true },
-    src: { url: '/dist' },
+    src: { url: '/build' },
   },
   plugins: [
     '@snowpack/plugin-react-refresh',
@@ -10,20 +9,17 @@ module.exports = {
     '@snowpack/plugin-typescript',
   ],
   routes: [
-    /* Enable an SPA Fallback in development: */
-    // {"match": "routes", "src": ".*", "dest": "/index.html"},
+    {"match": "routes", "src": ".*", "dest": "/index.html"},
   ],
   optimize: {
-    /* Example: Bundle your final build: */
-    // "bundle": true,
-  },
-  packageOptions: {
-    /* ... */
+    "bundle": true,
   },
   devOptions: {
-    /* ... */
+    "open":"none",
   },
-  buildOptions: {
-    /* ... */
-  },
+  alias:{
+    "@styles":"./src/styles",
+    "@types":"./src/types",
+    "@utils":"./src/urils"
+  }
 };

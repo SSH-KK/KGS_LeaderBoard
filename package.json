@@ -1,10 +1,9 @@
 {
   "scripts": {
-    "start": "snowpack dev",
+    "dev": "snowpack dev",
     "build": "snowpack build",
-    "test": "web-test-runner \"src/**/*.test.tsx\"",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-    "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
+    "format": "prettier --config prettier.config.js --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "lint": "prettier --config prettier.config.js --check \"src/**/*.{js,jsx,ts,tsx,json,css,md}\""
   },
   "dependencies": {
     "react": "^17.0.0",
@@ -18,10 +17,10 @@
     "@testing-library/react": "^11.0.0",
     "@types/chai": "^4.2.13",
     "@types/mocha": "^8.2.0",
+    "@types/node": "^14.14.35",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/snowpack-env": "^2.3.2",
-    "@web/test-runner": "^0.12.0",
     "chai": "^4.2.0",
     "prettier": "^2.0.5",
     "snowpack": "^3.0.1",

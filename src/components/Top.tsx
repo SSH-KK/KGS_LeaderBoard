@@ -10,13 +10,12 @@ const Top: React.FC = () => {
   const { request, loading, error } = UseHttp()
 
   useEffect(() => {
-    request('http://stuvars.com:8081/get_top', 'GET').then((tdata) => {
-      console.log(tdata)
+    request('/get_top', 'GET').then((tdata) => {
       setTop(tdata)
       setFloaded(true)
     })
     const getTop = setInterval(async () => {
-      const data = await request('http://stuvars.com:8081/get_top', 'GET')
+      const data = await request('/get_top', 'GET')
       if (data != top) {
         setTop(data)
       }
@@ -55,7 +54,7 @@ const Top: React.FC = () => {
                 </div>
                 <div className="col-7 px-0 fs-6 align-items-center flex-column d-flex">
                   {top[userIndex].last.map((game, gameIndex) => (
-                    <div className="d-flex align-items-center w-100 py-2 fw-bold">
+                    <div key={`game_${gameIndex}`} className="d-flex align-items-center w-100 py-2 fw-bold">
                       <p className="mb-0">{game.players.white.name} ({game.players.white.rank})</p>
                       <div
                         className={`mx-1 ${styles.circleDot} ${styles.circleWhite}`}

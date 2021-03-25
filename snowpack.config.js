@@ -23,5 +23,6 @@ module.exports = {
     "@utils":"./src/urils",
     "@components":"./src/components",
     "@hooks":"./src/hooks",
+    "@config":"./src/configs",
   }
 };

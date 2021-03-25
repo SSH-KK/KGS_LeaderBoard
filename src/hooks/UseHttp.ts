@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react'
+import {SERVER_URL} from '@config/webConfig'
 
 const UseHttp = () => {
   const [loading, setLoading] = useState<Boolean>(false)
@@ -8,7 +9,7 @@ const UseHttp = () => {
     async (url, method = 'GET', body = null, headers = {}) => {
       setLoading(true)
       try {
-        const res = await fetch(url, {
+        const res = await fetch(`${SERVER_URL}${url}`, {
           method,
           body,
           headers: { 'Content-Type': 'application/json', ...headers },

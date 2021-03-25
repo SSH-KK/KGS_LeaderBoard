@@ -12,6 +12,7 @@
       "@utils/*": ["./src/utils/*"],
       "@components/*": ["./src/components/*"],
       "@hooks/*": ["./src/hooks/*"],
+      "@config/*": ["./src/configs/*"],
     },
     "noEmit": true,
     "strict": true,

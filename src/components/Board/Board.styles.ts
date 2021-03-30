@@ -96,35 +96,3 @@ export const BoardInner = styled.div<IBoardInnerProps>`
     height: ${(props) => 100 / props.size}%;
   }
 `;
-
-export interface IntersectionProps {
-  size: number;
-}
-
-export const Intersection = styled.div<IntersectionProps>`
-  display: inline-block;
-  height: 100%;
-  position: relative;
-  width: ${(props) => 100 / props.size}%;
-
-  :before {
-    border-top: 1px solid #a78a48;
-    width: 100%;
-    display: block;
-    content: '';
-    top: calc((100%-1) / 2);
-    position: absolute;
-    z-index: 1;
-  }
-
-  :after {
-    border-left: 1px solid #a78a48;
-    height: 100%;
-    display: block;
-    content: '';
-    left: calc((100%-1) / 2);
-    top: 0px;
-    position: absolute;
-    z-index: 1;
-  }
-`;

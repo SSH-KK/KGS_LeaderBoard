@@ -13,5 +13,5 @@ const Template: Story<IBoardProps> = (args) => <Board {...args} />;
 export const Primary = Template.bind({});
 
 Primary.args = {
-  size: 12,
+  size: 13,
 };

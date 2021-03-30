@@ -1,13 +1,8 @@
 import React from 'react';
 
-import {
-  BoardCoord,
-  BoardInner,
-  Container,
-  Inner,
-  Intersection,
-} from './Board.styles';
+import { BoardCoord, BoardInner, Container, Inner } from './Board.styles';
 import { ALPHABET_START_CHAR } from '@config/boardConfig';
+import { Intersection } from './Intersection';
 
 export interface IBoardProps {
   size: number;
@@ -46,12 +41,15 @@ export const Board = (args: IBoardProps) => {
         <BoardInner size={args.size}>
           {Array(size)
             .fill('')
-            .map((_, RowIndex) => (
+            .map((_, rowIndex) => (
               <div className="row">
                 {Array(size)
                   .fill('')
                   .map((_, columnIndex) => (
-                    <Intersection size={size}></Intersection>
+                    <Intersection
+                      size={size}
+                      position={[rowIndex, columnIndex]}
+                    />
                   ))}
               </div>
             ))}

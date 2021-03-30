@@ -12,7 +12,7 @@
       "@utils/*": ["./src/utils/*"],
       "@components/*": ["./src/components/*"],
       "@hooks/*": ["./src/hooks/*"],
-      "@config/*": ["./src/configs/*"],
+      "@config/*": ["./src/configs/*"]
     },
     "noEmit": true,
     "strict": true,
@@ -20,5 +20,6 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
+    "types": ["node"]
   }
 }

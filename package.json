@@ -3,19 +3,27 @@
     "dev": "snowpack dev",
     "build": "snowpack build",
     "format": "prettier --config prettier.config.js --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\"",
-    "lint": "prettier --config prettier.config.js --check \"src/**/*.{js,jsx,ts,tsx,json,css,md}\""
+    "lint": "prettier --config prettier.config.js --check \"src/**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@types/styled-components": "^5.1.9",
     "bootstrap": "^5.0.0-beta3",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.2.2"
   },
   "devDependencies": {
     "@snowpack/plugin-dotenv": "^2.0.5",
     "@snowpack/plugin-react-refresh": "^2.4.0",
     "@snowpack/plugin-typescript": "^1.2.0",
     "@snowpack/web-test-runner-plugin": "^0.2.0",
+    "@storybook/addon-actions": "^6.1.21",
+    "@storybook/addon-essentials": "^6.1.21",
+    "@storybook/addon-links": "^6.1.21",
+    "@storybook/react": "^6.1.21",
     "@testing-library/react": "^11.0.0",
     "@types/bootstrap": "^5.0.9",
     "@types/chai": "^4.2.13",
@@ -28,6 +36,7 @@
     "chai": "^4.2.0",
     "prettier": "^2.0.5",
     "snowpack": "^3.0.1",
+    "storybook-css-modules-preset": "^1.0.7",
     "typescript": "^4.0.0"
   }
 }

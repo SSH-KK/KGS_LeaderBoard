@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   mount: {
     public: { url: '/', static: true },
@@ -8,21 +10,20 @@ module.exports = {
     '@snowpack/plugin-dotenv',
     '@snowpack/plugin-typescript',
   ],
-  routes: [
-    {"match": "routes", "src": ".*", "dest": "/index.html"},
-  ],
+  routes: [{ match: 'routes', src: '.*', dest: '/index.html' }],
   optimize: {
-    "bundle": true,
+    bundle: true,
   },
   devOptions: {
-    "open":"none",
+    open: 'none',
   },
-  alias:{
-    "@styles":"./src/styles",
-    "@type":"./src/types",
-    "@utils":"./src/urils",
-    "@components":"./src/components",
-    "@hooks":"./src/hooks",
-    "@config":"./src/configs",
-  }
+  alias: {
+    '@styles': path.join(__dirname, 'src/styles'),
+    '@type': path.join(__dirname, 'src/types'),
+    '@utils': path.join(__dirname, 'src/urils'),
+    '@components': path.join(__dirname, 'src/components'),
+    '@hooks': path.join(__dirname, 'src/hooks'),
+    '@config': path.join(__dirname, 'src/configs'),
+  },
+  exclude: ['**/node_modules/**/*', '**/*.test.*', '**/*.stories.*'],
 };

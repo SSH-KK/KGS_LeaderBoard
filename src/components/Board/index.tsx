@@ -1,62 +1,64 @@
-import React from 'react';
+import React from 'react'
 
-import {
-  BoardCoord,
-  BoardInner,
-  Container,
-  Inner,
-  Intersection,
-} from './Board.styles';
-import { ALPHABET_START_CHAR } from '@config/boardConfig';
+import { BoardCoord, BoardInner, Container, Inner } from './Board.styles'
+import { ALPHABET_START_CHAR } from '@config/boardConfig'
+import { Intersection } from '@components/Intersection'
+import { IntersectionState } from '@type/board'
 
 export interface IBoardProps {
-  size: number;
+  size: number
+  state: IntersectionState[][]
 }
 
-const startCharCode = ALPHABET_START_CHAR.charCodeAt(0);
+const startCharCode = ALPHABET_START_CHAR.charCodeAt(0)
 
-export const Board = (args: IBoardProps) => {
-  const { size } = args;
-
+export const Board = ({ size, state }: IBoardProps) => {
   return (
     <Container>
       <Inner>
-        <BoardCoord size={args.size}>
+        <BoardCoord size={size}>
           {['top', 'bottom'].map((pos) => (
-            <div className={pos}>
+            <div key={`${pos}coord`} className={pos}>
               {Array(size)
                 .fill('')
                 .map((_, i) => (
-                  <div className="caption">
+                  <div key={`${pos}${i}`} className="caption">
                     {String.fromCharCode(startCharCode + i)}
                   </div>
                 ))}
             </div>
           ))}
           {['left', 'right'].map((pos) => (
-            <div className={pos}>
+            <div key={`${pos}coord`} className={pos}>
               {Array(size)
                 .fill('')
                 .map((_, i) => (
-                  <div className="caption">{size - i}</div>
+                  <div key={`${pos}${i}`} className="caption">
+                    {size - i}
+                  </div>
                 ))}
             </div>
           ))}
         </BoardCoord>
-        <BoardInner size={args.size}>
+        <BoardInner size={size}>
           {Array(size)
             .fill('')
-            .map((_, RowIndex) => (
-              <div className="row">
+            .map((_, rowIndex) => (
+              <div key={`${rowIndex}row`} className="row">
                 {Array(size)
                   .fill('')
                   .map((_, columnIndex) => (
-                    <Intersection size={size}></Intersection>
+                    <Intersection
+                      key={`${columnIndex}column`}
+                      size={size}
+                      position={[rowIndex, columnIndex]}
+                      state={state[rowIndex][columnIndex]}
+                    />
                   ))}
               </div>
             ))}
         </BoardInner>
       </Inner>
     </Container>
-  );
-};
+  )
+}

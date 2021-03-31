@@ -1,5 +1,5 @@
-const snowpackConfig = require('../snowpack.config.js');
-const webpack = require('webpack');
+const snowpackConfig = require('../snowpack.config.js')
+const webpack = require('webpack')
 
 module.exports = {
   stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -12,7 +12,8 @@ module.exports = {
     config.resolve.alias = {
       ...config.resolve.alias,
       ...snowpackConfig.alias,
-    };
-    return config;
+    }
+
+    return config
   },
-};
+}

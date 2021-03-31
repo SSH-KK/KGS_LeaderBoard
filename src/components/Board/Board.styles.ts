@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Container = styled.div`
   position: relative;
   width: 100%;
   padding-top: 100%;
   background-color: #dfbd6d;
-`;
+`
 
 export const Inner = styled.div`
   position: absolute;
@@ -13,10 +13,10 @@ export const Inner = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-`;
+`
 
 export interface IBoardCoordProps {
-  size: number;
+  size: number
 }
 
 export const BoardCoord = styled.div<IBoardCoordProps>`
@@ -78,10 +78,10 @@ export const BoardCoord = styled.div<IBoardCoordProps>`
     text-align: center;
     vertical-align: sub;
   }
-`;
+`
 
 export interface IBoardInnerProps {
-  size: number;
+  size: number
 }
 
 export const BoardInner = styled.div<IBoardInnerProps>`
@@ -89,42 +89,10 @@ export const BoardInner = styled.div<IBoardInnerProps>`
   ${(props) =>
     ['top', 'left', 'bottom', 'right'].reduce(
       (collector, key) => collector + `\n${key}: ${100 / (props.size + 2)}%;`,
-      '',
+      ''
     )}
 
   .row {
     height: ${(props) => 100 / props.size}%;
   }
-`;
-
-export interface IntersectionProps {
-  size: number;
-}
-
-export const Intersection = styled.div<IntersectionProps>`
-  display: inline-block;
-  height: 100%;
-  position: relative;
-  width: ${(props) => 100 / props.size}%;
-
-  :before {
-    border-top: 1px solid #a78a48;
-    width: 100%;
-    display: block;
-    content: '';
-    top: calc((100%-1) / 2);
-    position: absolute;
-    z-index: 1;
-  }
-
-  :after {
-    border-left: 1px solid #a78a48;
-    height: 100%;
-    display: block;
-    content: '';
-    left: calc((100%-1) / 2);
-    top: 0px;
-    position: absolute;
-    z-index: 1;
-  }
-`;
+`

@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   mount: {
@@ -26,4 +26,4 @@ module.exports = {
     '@config': path.join(__dirname, 'src/configs'),
   },
   exclude: ['**/node_modules/**/*', '**/*.test.*', '**/*.stories.*'],
-};
+}

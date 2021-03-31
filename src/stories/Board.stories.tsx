@@ -1,17 +1,19 @@
-import React from 'react';
-import { Story } from '@storybook/react';
+import React from 'react'
+import { Story } from '@storybook/react'
 
-import { Board, IBoardProps } from '@components/Board';
+import { Board, IBoardProps } from '@components/Board'
+import { initializeState } from '@hooks/useBoardState'
 
 export default {
   title: 'Board',
   component: Board,
-};
+}
 
-const Template: Story<IBoardProps> = (args) => <Board {...args} />;
+const Template: Story<IBoardProps> = (args) => <Board {...args} />
 
-export const Primary = Template.bind({});
+export const Primary = Template.bind({})
 
 Primary.args = {
-  size: 12,
-};
+  size: 13,
+  state: initializeState(13),
+}

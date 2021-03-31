@@ -1,7 +1,7 @@
 import React from 'react'
-import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
+import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import Navbar from '@components/Navbar'
-import Game from '@components/Game'
+import GameView from '@components/GameView'
 import Top from '@components/Top'
 
 const App: React.FC = () => {
@@ -10,7 +10,11 @@ const App: React.FC = () => {
       <Navbar />
       <Switch>
         <Route exact path="/top" render={() => <Top />} />
-        <Route exact path="/game/:game_timestamp" render={({match}) => <Game match = {match} />} />
+        <Route
+          exact
+          path="/game/:game_timestamp"
+          render={({ match }) => <GameView match={match} />}
+        />
       </Switch>
     </BrowserRouter>
   )

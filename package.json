@@ -2,8 +2,8 @@
   "scripts": {
     "dev": "snowpack dev",
     "build": "snowpack build",
-    "format": "prettier --config .prettierrc --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\"",
-    "lint": "eslint --config .eslintrc \"src/**/*.{js,jsx,ts,tsx,json,md}\"",
+    "format": "prettier --config .prettierrc --write .",
+    "lint": "eslint --config .eslintrc --ext js,jsx,ts,tsx .",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

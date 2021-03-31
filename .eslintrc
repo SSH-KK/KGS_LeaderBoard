@@ -22,5 +22,10 @@
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off"
   },
-  "ignorePatterns": ["node_modules/"]
+  "ignorePatterns": [
+    "node_modules/",
+    "snowpack.config.js",
+    ".github/",
+    ".vscode/"
+  ]
 }

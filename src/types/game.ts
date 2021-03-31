@@ -1,66 +1,28 @@
-export type LastGameT = {
-  gameType: string
-  score: string
-  komi: number
-  size: number
-  players: {
-    white: {
-      name: string
-      flags: string
-      rank: string
-    }
-    black: {
-      name: string
-      flags: string
-      rank: string
-    }
-  }
-  handicap: number
-  timestamp: Date
+import { IntersectionState } from './board'
+
+export type BoardT = IntersectionState[][]
+
+export type PositionT = {
+  x: number
+  y: number
 }
 
-export type sgfEventPropT = [
-  {
-    loc: {
-      x: number
-      y: number
-    }
-    color: string
-    name: string
-  },
-  {
-    color: string
-    name: string
-    float: number
-    int: number
-  }
-]
-
-export type sgfeventT = {
-  type: string
-  nodeId: number
-  props: sgfEventPropT
+export type MoveChangeT = {
+  pos: PositionT
+  player: ColorT
 }
 
-export type GameSummaryT = {
-  gameType: string
-  score: string
-  private: boolean
-  komi: number
-  size: number
-  players: {
-    white: {
-      name: string
-      rank: string
-    }
-    black: {
-      name: string
-      rank: string
-    }
-  }
+export type ColorT = Exclude<IntersectionState, IntersectionState.EMPTY>
+
+export interface IGameMove {
+  adds: MoveChangeT[]
+  deaths: MoveChangeT[]
+  captures: [number, number]
+  n: number
 }
 
-export type GameInfoT = {
-  gameSummary: GameSummaryT
-  sgfEvents: sgfeventT[]
+export interface IGroup {
+  color: ColorT
+  stones: PositionT[]
+  border: PositionT[]
 }

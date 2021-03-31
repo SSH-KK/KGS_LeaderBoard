@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 
 import { IntersectionState } from '@type/board'
+import { ColorT } from '@type/game'
 
 export interface IStoneProps {
-  colour: Exclude<IntersectionState, IntersectionState.EMPTY>
+  colour: ColorT
 }
 
 export const Stone = styled.div<IStoneProps>`

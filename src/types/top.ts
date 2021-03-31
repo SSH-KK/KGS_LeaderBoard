@@ -1,4 +1,4 @@
-import { LastGameT } from './game'
+import { LastGameT } from './gameFetch'
 
 export type UserTopT = {
   name: string

@@ -6,6 +6,7 @@ import { IntersectionState } from './types';
 
 export interface IntersectionProps extends StyledIntersectionProps {
   position: [number, number];
+  state: IntersectionState;
 }
 
 interface StyledIntersectionProps {
@@ -71,18 +72,14 @@ const checkIsStar = (size: number, x: number, y: number) => {
 };
 
 export const Intersection = (args: IntersectionProps) => {
-  const size = args.size;
+  const { size, state } = args;
   const [y, x] = args.position;
 
   const [isStar, setIsStar] = useState<boolean>(false);
   useEffect(() => setIsStar(checkIsStar(size, x + 1, y + 1)), [size]);
 
-  const [state, setState] = useState<IntersectionState>(
-    IntersectionState.EMPTY,
-  );
-
   return (
-    <StyledIntersection size={args.size}>
+    <StyledIntersection size={size}>
       {isStar && <StarDot />}
       {state != IntersectionState.EMPTY && <Stone colour={state} />}
     </StyledIntersection>

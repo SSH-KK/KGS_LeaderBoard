@@ -1,11 +1,24 @@
 import { useState, useCallback } from 'react'
-import {SERVER_URL} from '@config/webConfig'
+import { SERVER_URL } from '@config/webConfig'
 
-const UseHttp = () => {
-  const [loading, setLoading] = useState<Boolean>(false)
+export type RequestFT = (
+  url: string,
+  method?: 'GET' | 'POST',
+  body?: any,
+  headers?: any,
+) => Promise<any>
+
+export type UseHttpReturnT = {
+  request: RequestFT
+  loading: boolean
+  error: Object | null
+}
+
+const useHttp = (): UseHttpReturnT => {
+  const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<Object | null>(null)
 
-  const request = useCallback(
+  const request = useCallback<RequestFT>(
     async (url, method = 'GET', body = null, headers = {}) => {
       setLoading(true)
       try {
@@ -25,10 +38,10 @@ const UseHttp = () => {
         setError(e)
       }
     },
-    []
+    [],
   )
 
   return { request, loading, error }
 }
 
-export default UseHttp
+export default useHttp

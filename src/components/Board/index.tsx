@@ -1,25 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react'
 
-import { BoardCoord, BoardInner, Container, Inner } from './Board.styles';
-import { ALPHABET_START_CHAR } from '@config/boardConfig';
-import { Intersection } from './Intersection';
-import { useBoardState } from '@hooks/useBoardState';
+import { BoardCoord, BoardInner, Container, Inner } from './Board.styles'
+import { ALPHABET_START_CHAR } from '@config/boardConfig'
+import { Intersection } from '@components/Intersection'
+import { IntersectionState } from '@type/board'
 
 export interface IBoardProps {
-  size: number;
+  size: number
+  state: IntersectionState[][]
 }
 
-const startCharCode = ALPHABET_START_CHAR.charCodeAt(0);
+const startCharCode = ALPHABET_START_CHAR.charCodeAt(0)
 
-export const Board = (args: IBoardProps) => {
-  const { size } = args;
-
-  const [state, setState] = useBoardState(size);
-
+export const Board = ({ size, state }: IBoardProps) => {
   return (
     <Container>
       <Inner>
-        <BoardCoord size={args.size}>
+        <BoardCoord size={size}>
           {['top', 'bottom'].map((pos) => (
             <div key={`${pos}coord`} className={pos}>
               {Array(size)
@@ -43,7 +40,7 @@ export const Board = (args: IBoardProps) => {
             </div>
           ))}
         </BoardCoord>
-        <BoardInner size={args.size}>
+        <BoardInner size={size}>
           {Array(size)
             .fill('')
             .map((_, rowIndex) => (
@@ -63,5 +60,5 @@ export const Board = (args: IBoardProps) => {
         </BoardInner>
       </Inner>
     </Container>
-  );
-};
+  )
+}

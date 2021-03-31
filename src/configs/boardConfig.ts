@@ -1,1 +1,1 @@
-export const ALPHABET_START_CHAR = 'A';
+export const ALPHABET_START_CHAR = 'A'

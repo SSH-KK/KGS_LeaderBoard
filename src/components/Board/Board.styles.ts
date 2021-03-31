@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Container = styled.div`
   position: relative;
   width: 100%;
   padding-top: 100%;
   background-color: #dfbd6d;
-`;
+`
 
 export const Inner = styled.div`
   position: absolute;
@@ -13,10 +13,10 @@ export const Inner = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-`;
+`
 
 export interface IBoardCoordProps {
-  size: number;
+  size: number
 }
 
 export const BoardCoord = styled.div<IBoardCoordProps>`
@@ -78,10 +78,10 @@ export const BoardCoord = styled.div<IBoardCoordProps>`
     text-align: center;
     vertical-align: sub;
   }
-`;
+`
 
 export interface IBoardInnerProps {
-  size: number;
+  size: number
 }
 
 export const BoardInner = styled.div<IBoardInnerProps>`
@@ -95,4 +95,4 @@ export const BoardInner = styled.div<IBoardInnerProps>`
   .row {
     height: ${(props) => 100 / props.size}%;
   }
-`;
+`

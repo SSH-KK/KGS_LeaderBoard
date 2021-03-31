@@ -1,10 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import { IntersectionState } from './types';
+import { IntersectionState } from '@type/board'
 
 export interface IStoneProps {
-  colour: Exclude<IntersectionState, IntersectionState.EMPTY>;
+  colour: Exclude<IntersectionState, IntersectionState.EMPTY>
 }
 
 export const Stone = styled.div<IStoneProps>`
@@ -44,4 +43,4 @@ export const Stone = styled.div<IStoneProps>`
         ? 'radial-gradient(ellipse at center, #505050 10%, rgba(80, 80, 80, 0) 55%)'
         : 'radial-gradient(ellipse at center, #fff 20%, hsla(0, 0%, 100%, 0) 70%)'};
   }
-`;
+`

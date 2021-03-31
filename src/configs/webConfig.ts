@@ -1,1 +1,1 @@
-export const SERVER_URL = 'http://stuvars.com:8081';
+export const SERVER_URL = 'http://stuvars.com:8081'

@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
 
-import styled from 'styled-components';
-import { Stone } from './Stone';
-import { IntersectionState } from './types';
+import { Stone } from '@components/Stone'
+import { IntersectionState } from '@type/board'
 
 export interface IntersectionProps extends StyledIntersectionProps {
-  position: [number, number];
-  state: IntersectionState;
+  position: [number, number]
+  state: IntersectionState
 }
 
 interface StyledIntersectionProps {
-  size: number;
+  size: number
 }
 
 const StyledIntersection = styled.div<StyledIntersectionProps>`
@@ -39,7 +39,7 @@ const StyledIntersection = styled.div<StyledIntersectionProps>`
     position: absolute;
     z-index: 1;
   }
-`;
+`
 
 const StarDot = styled.div`
   position: absolute;
@@ -52,36 +52,36 @@ const StarDot = styled.div`
   margin-left: -12.5%;
   margin-top: -12.5%;
   z-index: 500;
-`;
+`
 
 const checkIsStar = (size: number, x: number, y: number) => {
   if (size == 19)
     if ((x == 4 || x == 10 || x == 16) && (y == 4 || y == 10 || y == 16)) {
-      return true;
+      return true
     }
   if (size == 13)
     if ((x == 4 || x == 7 || x == 10) && (y == 4 || y == 7 || y == 10)) {
-      return true;
+      return true
     }
   if (size == 9)
     if ((x == 3 || x == 5 || x == 7) && (y == 3 || y == 5 || y == 7)) {
-      return true;
+      return true
     }
 
-  return false;
-};
+  return false
+}
 
 export const Intersection = (args: IntersectionProps) => {
-  const { size, state } = args;
-  const [y, x] = args.position;
+  const { size, state } = args
+  const [y, x] = args.position
 
-  const [isStar, setIsStar] = useState<boolean>(false);
-  useEffect(() => setIsStar(checkIsStar(size, x + 1, y + 1)), [size]);
+  const [isStar, setIsStar] = useState<boolean>(false)
+  useEffect(() => setIsStar(checkIsStar(size, x + 1, y + 1)), [size])
 
   return (
     <StyledIntersection size={size}>
       {isStar && <StarDot />}
       {state != IntersectionState.EMPTY && <Stone colour={state} />}
     </StyledIntersection>
-  );
-};
+  )
+}

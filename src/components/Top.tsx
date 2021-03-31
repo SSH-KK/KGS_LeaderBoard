@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import UseHttp from '@hooks/UseHttp'
+import UseHttp from '@hooks/useHttp'
 import { UserTopT } from '@type/top'
 import Loader from '@components/Loader'
 import styles from '@styles/Top.module.css'
 
 const Top: React.FC = () => {
   const [top, setTop] = useState<UserTopT[]>([])
-  const [floaded, setFloaded] = useState<Boolean>(false)
-  const { request, loading, error } = UseHttp()
+  const [floaded, setFloaded] = useState<boolean>(false)
+  const { request, error } = UseHttp()
 
   useEffect(() => {
-    request('/get_top', 'GET').then((tdata) => {
+    request<UserTopT[]>('/get_top', 'GET').then((tdata) => {
       setTop(tdata)
       setFloaded(true)
     })
     const getTop = setInterval(async () => {
-      const data = await request('/get_top', 'GET')
+      const data = await request<UserTopT[]>('/get_top', 'GET')
       if (data != top) {
         setTop(data)
       }
@@ -70,7 +70,7 @@ const TopLine: React.FC<TopLineProps> = ({ user }) => {
           </p>
         </div>
         <div className="col-7 px-0 fs-6 align-items-center flex-column d-flex">
-          {user.last.map((game, gameIndex) => (
+          {user.last.map((game) => (
             <Link
               to={`/game/${game.timestamp}`}
               key={game.timestamp.toISOString()}

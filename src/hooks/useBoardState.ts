@@ -1,5 +1,5 @@
 import { IntersectionState } from '@type/board'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { useState } from 'react'
 
 export const initializeState = (size: number): IntersectionState[][] =>
   new Array(size).fill(new Array(size).fill(IntersectionState.EMPTY))
@@ -7,14 +7,14 @@ export const initializeState = (size: number): IntersectionState[][] =>
 export type SetBoardStateFT = (
   x: number,
   y: number,
-  value: IntersectionState,
+  value: IntersectionState
 ) => void
 
 export type useBoardStateReturnT = [IntersectionState[][], SetBoardStateFT]
 
 export const useBoardState = (size: number): useBoardStateReturnT => {
   const [state, setState] = useState<IntersectionState[][]>(
-    initializeState(size),
+    initializeState(size)
   )
 
   const setBoardState: SetBoardStateFT = (x, y, value) => {
@@ -27,7 +27,7 @@ export const useBoardState = (size: number): useBoardStateReturnT => {
               else return prevValue
             })
           else return boardRow
-        }),
+        })
       )
   }
 

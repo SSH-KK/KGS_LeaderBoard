@@ -89,7 +89,7 @@ export const BoardInner = styled.div<IBoardInnerProps>`
   ${(props) =>
     ['top', 'left', 'bottom', 'right'].reduce(
       (collector, key) => collector + `\n${key}: ${100 / (props.size + 2)}%;`,
-      '',
+      ''
     )}
 
   .row {

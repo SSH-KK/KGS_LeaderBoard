@@ -1,8 +1,5 @@
-import { IntersectionState } from '@components/Board/types'
+import { IntersectionState } from '@type/board'
 import { SetBoardStateFT } from '@hooks/useBoardState'
-import { useEffect, useState } from 'react'
-import { useBoardState } from './useBoardState'
-import useHttp from './UseHttp'
 
 export interface IGameState {
   size: number
@@ -12,7 +9,7 @@ export interface IGameState {
 export const useGame = (
   timestamp: string,
   board: IntersectionState[][],
-  setBoardState: SetBoardStateFT,
+  setBoardState: SetBoardStateFT
 ) => {
   return [0]
 }

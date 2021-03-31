@@ -33,7 +33,7 @@ export type sgfEventPropT = [
     name: string
     float: number
     int: number
-  },
+  }
 ]
 
 export type sgfeventT = {

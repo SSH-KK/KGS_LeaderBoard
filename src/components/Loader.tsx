@@ -3,7 +3,7 @@ import styles from '@styles/Loader.module.css'
 
 type LoaderProps = {
   children?: React.ReactNode
-  loading: Boolean
+  loading: boolean
 }
 
 const Loader: React.FC<LoaderProps> = ({ loading, children }) => {

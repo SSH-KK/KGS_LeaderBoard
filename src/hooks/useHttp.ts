@@ -34,8 +34,10 @@ const useHttp = (): UseHttpReturnT => {
         setLoading(false)
         return data
       } catch (e) {
-        setLoading(false)
+        console.log('WAS ERROR')
+        console.log(e)
         setError(e)
+        setLoading(false)
       }
     },
     []

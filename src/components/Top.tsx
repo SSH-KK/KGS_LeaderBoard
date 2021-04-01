@@ -9,7 +9,7 @@ import styles from '@styles/Top.module.css'
 const Top: React.FC = () => {
   const [top, setTop] = useState<UserTopT[]>([])
   const [floaded, setFloaded] = useState<boolean>(false)
-  const { request, error } = UseHttp()
+  const { request, loading, error } = UseHttp()
 
   useEffect(() => {
     request<UserTopT[]>('/get_top', 'GET').then((tdata) => {
@@ -27,26 +27,22 @@ const Top: React.FC = () => {
     }
   }, [])
   return (
-    <Loader loading={!floaded || error != null}>
-      <div className="container mt-3">
-        <div className="row h-100 bg-dark p-3 rounded">
-          <div className="col-md-12 border-2 border-start py-2 border-white border-end justify-content-between align-items-center d-flex text-white">
-            <div className="row justify-content-center align-items-center m-0 w-100">
-              <div className="col-3 px-0 fs-5 justify-content-start align-items-center d-flex">
-                <p className="fw-bold mb-0">№ Name</p>
-              </div>
-              <div className="col-7 px-0 fs-5 justify-content-start align-items-center d-flex">
-                <p className=" mb-0 fw-bold">Last 2 games</p>
-              </div>
-              <div className="col-1 px-0 fs-5 justify-content-center align-items-center d-flex">
-                <p className=" mb-0 fw-bold">Rank</p>
-              </div>
-            </div>
-          </div>
-          {top.map((user) => (
+    <Loader loading={!floaded && !error}>
+      <div className='container mt-3'>
+      <table className="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">№ Name</th>
+            <th scope="col" className="text-center">2 Last Games</th>
+            <th scope="col">Rank</th>
+          </tr>
+        </thead>
+        <tbody>
+          {top && top.map((user) => (
             <TopLine key={user.place} user={user} />
           ))}
-        </div>
+        </tbody>
+      </table>
       </div>
     </Loader>
   )
@@ -58,49 +54,29 @@ type TopLineProps = {
 
 const TopLine: React.FC<TopLineProps> = ({ user }) => {
   return (
-    <div
-      className={`${
-        (user.place - 1) % 2 == 0 ? styles.odLine : ''
-      } col-md-12 border-2 border-start py-2 border-white border-end justify-content-between align-items-center d-flex text-white`}
-    >
-      <div className="row justify-content-center align-items-center m-0 w-100">
-        <div className="col-3 px-0 fs-5 justify-content-start align-items-center d-flex fw-bold">
-          <p className="mb-0">
-            {user.place}: {user.name}
-          </p>
-        </div>
-        <div className="col-7 px-0 fs-6 align-items-center flex-column d-flex">
-          {user.last.map((game) => (
-            <Link
-              to={`/game/${game.timestamp}`}
-              key={game.timestamp.toISOString()}
-              className="d-flex align-items-center w-100 py-2 fw-bold"
-            >
-              <p className="mb-0">
-                {game.players.white.name} ({game.players.white.rank})
-              </p>
-              <div
-                className={`mx-1 ${styles.circleDot} ${styles.circleWhite}`}
-              ></div>
-              <p className="mb-0">&nbsp;/&nbsp;</p>
-              <p className="mb-0">
-                {game.players.black.name} ({game.players.white.rank})
-              </p>
-              <div
-                className={`mx-1 ${styles.circleDot} ${styles.circleBlack}`}
-              ></div>
-              <p className="mb-0 ms-2">score: {game.score}</p>
-              <p className="mb-0 ms-2">
-                {game.size}x{game.size}
-              </p>
+    <tr>
+      <th className='fs-5'>{user.place}: {user.name}</th>
+      <td>
+        <div className="row">
+          {user.last.map((game)=>(
+            <Link key={new Date(game.timestamp).toISOString()} to={`/game/${game.timestamp}`} className={`${styles.hoveredLink} link-light text-decoration-none`}>
+            <div className="col-12 text-center">
+              <span className="m-0 fs-5">
+              {game.players.white.name} ({game.players.white.rank})&nbsp;
+              <div className={`${styles.circleDot} ${styles.circleWhite}`}></div>
+              &nbsp;/&nbsp;
+              {game.players.black.name} ({game.players.black.rank})&nbsp;
+              <div className={`${styles.circleDot} ${styles.circleBlack}`}></div>&nbsp;
+              score: {game.score}&nbsp;
+              {game.size}x{game.size}
+              </span>
+            </div>
             </Link>
           ))}
         </div>
-        <div className="col-1 px-0 fs-5 justify-content-center align-items-center d-flex fw-bold">
-          <p className=" mb-0">{user.rank}</p>
-        </div>
-      </div>
-    </div>
+      </td>
+      <td className='fs-5'>{user.rank}</td>
+    </tr>
   )
 }
 

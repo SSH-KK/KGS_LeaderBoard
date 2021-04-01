@@ -28,13 +28,13 @@ const Top: React.FC = () => {
   }, [])
   return (
     <Loader loading={!floaded && !error}>
-      <div className='container mt-3'>
+      <div className='container-md px-0 mt-md-3'>
       <table className="table table-dark table-striped">
         <thead>
           <tr>
-            <th scope="col">№ Name</th>
-            <th scope="col" className="text-center">2 Last Games</th>
-            <th scope="col">Rank</th>
+            <th scope="col" className="fs-5">№ Name</th>
+            <th scope="col" className="text-center fs-5">2 Last Games</th>
+            <th scope="col" className="fs-5">Rank</th>
           </tr>
         </thead>
         <tbody>

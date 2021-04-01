@@ -1,9 +1,10 @@
 import { SetBoardStateFT } from '@hooks/useBoardState'
 import { GameInfoT } from '@type/gameFetch'
 import { useEffect, useState } from 'react'
-import { BoardT, IGameMove, IGroup } from '@type/game'
+import { IGameMove, WorkBoardT } from '@type/game'
 import { placeStone, countCaptures, initializeWorkBoard } from '@utils/game'
 import { convertPlayerColor } from '@utils/gameFetch'
+import { BoardT } from '@type/board'
 
 export const useGame = (
   state: GameInfoT,
@@ -15,7 +16,7 @@ export const useGame = (
 
   const [moves, setMovesState] = useState<IGameMove[]>([])
 
-  const [workBoard, setWorkBoardState] = useState<IGroup[][] | null[][]>(
+  const [workBoard, setWorkBoardState] = useState<WorkBoardT>(
     initializeWorkBoard(state.gameSummary.size)
   )
 
@@ -26,7 +27,7 @@ export const useGame = (
       return state.sgfEvents.map((event, eventIndex) => {
         const { adds, deaths } = placeStone(
           convertPlayerColor(event.props[0].color),
-          event.props[0].loc,
+          [event.props[0].loc.x, event.props[0].loc.y],
           workBoard,
           setWorkBoardState
         )

@@ -1,5 +1,5 @@
 import { IntersectionState } from '@type/board'
-import { BoardT } from '@type/game'
+import { BoardT } from '@type/board'
 import { useState } from 'react'
 
 export const initializeState = (size: number): BoardT =>

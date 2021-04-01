@@ -5,7 +5,7 @@
     "target": "es2020",
     "moduleResolution": "node",
     "jsx": "react",
-    "lib": ["es2017.object"],
+    "lib": ["DOM", "es2019", "es2017.object"],
     "baseUrl": "./",
     "paths": {
       "@styles/*": ["./src/styles/*"],

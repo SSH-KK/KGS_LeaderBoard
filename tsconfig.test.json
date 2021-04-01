@@ -3,6 +3,7 @@
     "module": "commonjs",
     "target": "es6",
     "baseUrl": "./",
+    "lib": ["DOM", "es2019", "es2017.object"],
     "paths": {
       "@styles/*": ["./src/styles/*"],
       "@type/*": ["./src/types/*"],

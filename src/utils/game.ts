@@ -1,5 +1,5 @@
 import { IntersectionState } from '@type/board'
-import { MoveChangeT, ColorT, PositionT, IGroup } from '@type/game'
+import { MoveChangeT, ColorT, PositionT, IGroup, WorkBoardT } from '@type/game'
 import { Dispatch, SetStateAction } from 'react'
 
 export const getOpponent = (player: ColorT): ColorT =>
@@ -7,14 +7,11 @@ export const getOpponent = (player: ColorT): ColorT =>
     ? IntersectionState.BLACK
     : IntersectionState.WHITE
 
-export const countCaptures = (
-  prevCaptures: [number, number],
-  deaths: MoveChangeT[]
-) =>
-  deaths.reduce((captures, death): [number, number] => {
+export const countCaptures = (prevCaptures: PositionT, deaths: MoveChangeT[]) =>
+  deaths.reduce((captures, death): PositionT => {
     if (death.player === IntersectionState.BLACK)
       return [captures[0] + 1, captures[1]]
-    else return [captures[1], captures[1] + 1]
+    else return [captures[0], captures[1] + 1]
   }, prevCaptures)
 
 export const initializeWorkBoard = (size: number) =>
@@ -28,8 +25,8 @@ export const initializeWorkBoard = (size: number) =>
 
 export const initGroup = (color: ColorT, stones: PositionT[] = []): IGroup => ({
   color,
-  stones,
-  border: [],
+  stones: new Set(stones),
+  border: new Set(),
 })
 
 export const mergeGroups = (a: IGroup, b: IGroup) => {
@@ -38,10 +35,20 @@ export const mergeGroups = (a: IGroup, b: IGroup) => {
 
   const newGroup = initGroup(a.color, [...a.stones, ...b.stones])
 
-  newGroup.border = [...a.border, ...b.border]
+  newGroup.border = new Set(
+    [...a.border, ...b.border].filter(
+      (el) => !a.stones.has(el) && !b.stones.has(el)
+    )
+  )
 
   return newGroup
 }
+
+export const countLiberties = (group: IGroup, board: WorkBoardT): number =>
+  [...group.border].reduce(
+    (collector, [x, y]) => collector + (board[y][x] ? 1 : 0),
+    0
+  )
 
 interface AddStoneReturnT {
   adds: MoveChangeT[]
@@ -51,17 +58,22 @@ interface AddStoneReturnT {
 export const placeStone = (
   player: ColorT,
   pos: PositionT,
-  board: IGroup[][] | null[][],
-  setBoardState: Dispatch<SetStateAction<IGroup[][] | null[][]>>
+  board: WorkBoardT,
+  setBoardState: Dispatch<SetStateAction<WorkBoardT>>
 ): AddStoneReturnT => {
   // TODO: add validation
 
-  const { x, y } = pos
+  const [x, y] = pos
   const size = board.length
 
   const adds: MoveChangeT[] = []
   const deaths: MoveChangeT[] = []
-  const opponent = getOpponent(player)
+  // const opponent = getOpponent(player)
+
+  const moveActions: { kill: IGroup[]; remove: IGroup[] } = {
+    kill: [],
+    remove: [],
+  }
 
   let newGroup = initGroup(player, [pos])
 
@@ -70,18 +82,19 @@ export const placeStone = (
     [x + 1, y],
     [x - 1, y],
     [x, y - 1],
-  ] as [number, number][]) {
+  ] as PositionT[]) {
     if (checkX < 0 || checkY < 0 || checkX == size || checkY == size) continue
 
-    newGroup.border.push({ x: checkX, y: checkY })
+    newGroup.border.add([checkX, checkY])
 
     const checkGroup = board[checkY][checkX]
 
     if (checkGroup === null) continue
 
-    if (newGroup.color === checkGroup.color) {
+    if (newGroup.color === checkGroup.color)
       newGroup = mergeGroups(newGroup, checkGroup)
-    }
+    else if (countLiberties(checkGroup, board) === 1)
+      moveActions.kill.push(checkGroup)
   }
 
   return { adds, deaths }

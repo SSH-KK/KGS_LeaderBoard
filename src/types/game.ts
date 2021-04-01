@@ -1,11 +1,8 @@
 import { IntersectionState } from './board'
 
-export type BoardT = IntersectionState[][]
+export type WorkBoardT = (IGroup | null)[][]
 
-export type PositionT = {
-  x: number
-  y: number
-}
+export type PositionT = [number, number]
 
 export type MoveChangeT = {
   pos: PositionT
@@ -23,6 +20,6 @@ export interface IGameMove {
 
 export interface IGroup {
   color: ColorT
-  stones: PositionT[]
-  border: PositionT[]
+  stones: Set<PositionT>
+  border: Set<PositionT>
 }

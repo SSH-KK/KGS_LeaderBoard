@@ -1,3 +1,6 @@
 {
-    "typescript.tsdk": "node_modules\\typescript\\lib"
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "mocha.files.glob": "src/**/*.test.ts",
+  "mocha.requires": ["ts-node/register", "tsconfig-paths/register"],
+  "mocha.env": { "TS_NODE_PROJECT": "tsconfig.test.json" }
 }

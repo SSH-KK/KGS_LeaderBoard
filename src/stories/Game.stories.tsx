@@ -2,7 +2,7 @@ import React, { ComponentProps } from 'react'
 import { Story } from '@storybook/react'
 
 import { Game } from '@components/Game'
-import { GameInfoT } from '@type/game'
+import { GameInfoT } from '@type/gameFetch'
 import testState from '../assets/test.json'
 
 export default {

@@ -3,7 +3,7 @@ import React from 'react'
 import { BoardCoord, BoardInner, Container, Inner } from './Board.styles'
 import { ALPHABET_START_CHAR } from '@config/boardConfig'
 import { Intersection } from '@components/Intersection'
-import { BoardT } from '@type/game'
+import { BoardT } from '@type/board'
 
 export interface IBoardProps {
   size: number

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { match } from 'react-router-dom'
 
-import { GameInfoT } from '@type/game'
+import { GameInfoT } from '@type/gameFetch'
 import useHttp from '@hooks/useHttp'
 import Loader from './Loader'
 import { Game } from './Game'

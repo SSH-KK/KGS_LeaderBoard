@@ -3,4 +3,4 @@ snowpack.config.js
 .github/
 .vscode/
 .*rc
-*.json
+package-lock.json

@@ -58,7 +58,7 @@ type TopLineProps = {
 
 const TopLine: React.FC<TopLineProps> = ({ user }) => {
   return (
-    <tr className='align-middle'>
+    <tr className="align-middle">
       <th className="fs-5">
         {user.place}: {user.name}
       </th>

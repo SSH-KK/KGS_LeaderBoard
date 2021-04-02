@@ -2,7 +2,7 @@ import React, { ComponentProps } from 'react'
 import { Story } from '@storybook/react'
 
 import { Game } from '@components/Game'
-import { GameInfoT } from '@type/game'
+import { IFetchedGame } from '@type/fetch'
 import testState from '../assets/test.json'
 
 export default {
@@ -18,5 +18,5 @@ export const Primary = Template.bind({})
 
 Primary.args = {
   timestamp: 'dfhjgfhgjf',
-  state: testState as GameInfoT,
+  state: (testState as unknown) as IFetchedGame,
 }

@@ -1,4 +1,6 @@
+import javascript
 from browser import window
+
 BLACK = True
 WHITE = False
 
@@ -60,7 +62,7 @@ class GoLogic(object):
     for j in range(self.size):
       for i in range(self.size):
         if self.board[j][i] is None:
-          colors[j][i] = None
+          colors[j][i] = javascript.NULL
         else:
           colors[j][i] = self.board[j][i].color
     return colors
@@ -147,11 +149,14 @@ class GoLogic(object):
     for j in range(self.size):
       for i in range(self.size):
         color = self.territory[j][i]
-        if color is not None:
-          if self.board[j][i] is not None:
-            self.score[color] = self.score[color] + 2
-          else:
-            self.score[color] = self.score[color] + 1
+        if color is None:
+          continue
+        color = int(color)
+        if self.board[j][i] is not None:
+          self.score[color] = self.score[color] + 2
+        else:
+          self.score[color] = self.score[color] + 1
+    return self.score
 
 
 boards = {}
@@ -162,7 +167,7 @@ def create_board(tid, size):
   return boards[tid].get_data()
 
 
-def place(tid, x, y):
+def place_stone(tid, x, y):
   board = boards.get(tid)
   if not board:
     return None
@@ -178,7 +183,7 @@ def get_data(tid):
   return board.get_data()
 
 
-def score(tid):
+def get_score(tid):
   board = boards.get(tid)
   if not board:
     return None
@@ -190,5 +195,5 @@ window.game = {}
 
 window.game.createBoard = create_board
 window.game.getData = get_data
-window.game.getScore = score
-window.game.place = place
+window.game.getScore = get_score
+window.game.place = place_stone

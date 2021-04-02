@@ -3,15 +3,18 @@ import { SetFullBoardStateFT } from '@hooks/useBoardState'
 import { useEffect, useState } from 'react'
 import { createBoard, getData, makeMove } from '@utils/goLogic'
 import { IFetchedGame } from '@type/fetch'
-import { ColorT, CurrentStepT, GameStepT } from '@type/game'
+import { ColorT, GameStepT } from '@type/game'
 import { BoardData } from '@type/pyGame'
 
 const convertStringToColor = (str: 'black' | 'white'): ColorT =>
   str === 'black' ? IntersectionState.BLACK : IntersectionState.WHITE
 
-export type UseGameReturnT =
-  | [false, CurrentStepT, (to: number) => void]
-  | [true, undefined, (to: number) => void]
+export type UseGameReturnT = [
+  GameStepT[],
+  number,
+  boolean,
+  (to: number) => void
+]
 
 export const useGame = (
   timestamp: string,
@@ -22,18 +25,7 @@ export const useGame = (
 
   const [steps, setSteps] = useState<GameStepT[]>([])
 
-  const [currentStep, setCurrentStep] = useState<CurrentStepT>()
-
-  const seekToStep = (to: number) => {
-    if (to < steps.length && to >= 0) {
-      setCurrentStep(() => ({
-        step: steps[to],
-        n: to,
-      }))
-
-      setFullBoardState(steps[to].boardState)
-    }
-  }
+  const [currentStep, setCurrentStep] = useState(0)
 
   useEffect(() => {
     if (createBoard(timestamp, fetchedGame.gameSummary.size))
@@ -54,11 +46,17 @@ export const useGame = (
       )
   }, [])
 
+  const seekToStep = (to: number) => {
+    if (to < steps.length && to >= 0) {
+      setFullBoardState(steps[to].boardState)
+      setCurrentStep(() => to)
+    }
+  }
+
   useEffect(() => {
-    setLoading(false)
     seekToStep(steps.length - 1)
+    setLoading(false)
   }, [steps])
 
-  if (loading) return [true, undefined, seekToStep]
-  else return [false, currentStep!, seekToStep]
+  return [steps, currentStep, loading, seekToStep]
 }

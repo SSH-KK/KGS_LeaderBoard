@@ -6,8 +6,3 @@ export type GameStepT = {
   color: ColorT
   boardState: BoardT
 }
-
-export type CurrentStepT = {
-  step: GameStepT
-  n: number
-}

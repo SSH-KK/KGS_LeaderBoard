@@ -9,11 +9,9 @@ import { BoardData } from '@type/pyGame'
 const convertStringToColor = (str: 'black' | 'white'): ColorT =>
   str === 'black' ? IntersectionState.BLACK : IntersectionState.WHITE
 
-export type UseGameReturnT = [
-  boolean,
-  CurrentStepT | undefined,
-  (to: number) => void
-]
+export type UseGameReturnT =
+  | [false, CurrentStepT, (to: number) => void]
+  | [true, undefined, (to: number) => void]
 
 export const useGame = (
   timestamp: string,
@@ -61,5 +59,6 @@ export const useGame = (
     seekToStep(steps.length - 1)
   }, [steps])
 
-  return [loading, currentStep, seekToStep]
+  if (loading) return [true, undefined, seekToStep]
+  else return [false, currentStep!, seekToStep]
 }

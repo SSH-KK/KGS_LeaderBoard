@@ -1,18 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { BoardCoord, BoardInner, Container, Inner } from './Board.styles'
 import { ALPHABET_START_CHAR } from '@config/boardConfig'
 import { Intersection } from '@components/Intersection'
-import { IntersectionState } from '@type/board'
+import { BoardT } from '@type/board'
 
 export interface IBoardProps {
   size: number
-  state: IntersectionState[][]
+  state: BoardT
 }
 
 const startCharCode = ALPHABET_START_CHAR.charCodeAt(0)
 
 export const Board = ({ size, state }: IBoardProps) => {
+  useEffect(() => {
+    console.log(state)
+  }, [state])
+
   return (
     <Container>
       <Inner>

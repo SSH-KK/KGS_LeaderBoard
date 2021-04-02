@@ -1,10 +1,12 @@
+import { BoardT } from './board'
+
 export type PyGameData = {
   $string_dict: {
     color: [boolean, number]
     game_over: [boolean, number]
     score: [[number, number], number]
     size: [number, number]
-    stones: [(boolean | null)[][], number]
+    stones: [BoardT, number]
     territory: [(boolean | null)[][], number]
   }
 }
@@ -28,7 +30,7 @@ export interface PassT {
 
 export interface BoardData {
   size: number
-  stones: (boolean | null)[][]
+  stones: BoardT
   game_over: boolean
   score: ScoreT
   color: boolean

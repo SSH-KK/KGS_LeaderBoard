@@ -3,3 +3,5 @@ export enum IntersectionState {
   BLACK,
   WHITE,
 }
+
+export type BoardT = IntersectionState[][]

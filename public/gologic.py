@@ -55,9 +55,9 @@ class GoLogic(object):
     for j in range(self.size):
       for i in range(self.size):
         if self.board[j][i] is None:
-          colors[j][i] = javascript.NULL
+          colors[j][i] = 0
         else:
-          colors[j][i] = self.board[j][i].color
+          colors[j][i] = 1 if self.board[j][i].color == BLACK else 2
     return colors
 
   def _add(self, grp):

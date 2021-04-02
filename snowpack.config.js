@@ -21,7 +21,7 @@ module.exports = {
   alias: {
     '@styles': path.join(__dirname, 'src/styles'),
     '@type': path.join(__dirname, 'src/types'),
-    '@utils': path.join(__dirname, 'src/urils'),
+    '@utils': path.join(__dirname, 'src/utils'),
     '@components': path.join(__dirname, 'src/components'),
     '@hooks': path.join(__dirname, 'src/hooks'),
     '@config': path.join(__dirname, 'src/configs'),

@@ -5,7 +5,7 @@ export const Container = styled.div`
   width: 100%;
   padding-top: 100%;
   background-color: #212529;
-  border-radius: 0.25rem;
+  border-radius: 0.3rem;
 `
 
 export const Inner = styled.div`
@@ -33,7 +33,7 @@ export const BoardCoord = styled.div<IBoardCoordProps>`
   .boardright {
     position: absolute;
     text-align: center;
-    color: #9B9D97;
+    color: #9b9d97;
   }
 
   .boardtop,

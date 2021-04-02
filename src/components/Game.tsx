@@ -9,6 +9,7 @@ import styles from '@styles/Game.module.css'
 import LeftArrow from '@icons/LeftArrow.svg'
 import RightArrow from '@icons/RightArrow.svg'
 import Loader from '@components/Loader'
+import { Steps } from './Steps'
 
 export interface IGameProps {
   state: IFetchedGame
@@ -94,62 +95,10 @@ export const Game = (args: IGameProps) => {
                 </div>
               </div>
               <span className="text-white fs-5 mb-2">Game step info:</span>
-              <div
-                className={`col-12 d-flex flex-column text-secondary ${styles.scrollMenu}`}
-              >
-                <span
-                  className={`fs-5 bg-info p-1 border-bottom border-2 text-center ${styles.activeInfo}`}
-                >
-                  x:B y:12 COLOR:BLACK
-                </span>
-                <span className="fs-5 p-1 border-top border-bottom border-2 bg-light text-center">
-                  x:B y:12 COLOR:BLACK
-                </span>
-                <span className="fs-5 p-1 border-top border-bottom border-2 bg-light text-center">
-                  x:B y:12 COLOR:BLACK
-                </span>
-                <span className="fs-5 p-1 border-top border-bottom border-2 bg-light text-center">
-                  x:B y:12 COLOR:BLACK
-                </span>
-                <span className="fs-5 p-1 border-top border-bottom border-2 bg-light text-center">
-                  x:B y:12 COLOR:BLACK
-                </span>
-                <span className="fs-5 p-1 border-top border-bottom border-2 bg-light text-center">
-                  x:B y:12 COLOR:BLACK
-                </span>
-                <span className="fs-5 p-1 border-top border-bottom border-2 bg-light text-center">
-                  x:B y:12 COLOR:BLACK
-                </span>
-                <span className="fs-5 p-1 border-top border-bottom border-2 bg-light text-center">
-                  x:B y:12 COLOR:BLACK
-                </span>
-                <span className="fs-5 p-1 border-top border-bottom border-2 bg-light text-center">
-                  x:B y:12 COLOR:BLACK
-                </span>
-                <span className="fs-5 p-1 border-top border-bottom border-2 bg-light text-center">
-                  x:B y:12 COLOR:BLACK
-                </span>
-                <span className="fs-5 p-1 border-top border-bottom border-2 bg-light text-center">
-                  x:B y:12 COLOR:BLACK
-                </span>
-                <span className="fs-5 p-1 border-top border-bottom border-2 bg-light text-center">
-                  x:B y:12 COLOR:BLACK
-                </span>
-                <span className="fs-5 p-1 border-top border-bottom border-2 bg-light text-center">
-                  x:B y:12 COLOR:BLACK
-                </span>
-                <span className="fs-5 p-1 border-top border-bottom border-2 bg-light text-center">
-                  x:B y:12 COLOR:BLACK
-                </span>
-                <span className="fs-5 p-1 border-top border-bottom border-2 bg-light text-center">
-                  x:B y:12 COLOR:BLACK
-                </span>
-                <span className="fs-5 p-1 border-top border-bottom border-2 bg-light text-center">
-                  x:B y:12 COLOR:BLACK
-                </span>
-                <span className="fs-5 p-1 border-top border-3 bg-light text-center">
-                  x:B y:12 COLOR:BLACK
-                </span>
+              <div className={`col-12 ${styles.scrollMenu}`}>
+                <div className={styles.scrollContent}>
+                  <Steps currentStep={currentStep} steps={steps} />
+                </div>
               </div>
             </div>
           </div>

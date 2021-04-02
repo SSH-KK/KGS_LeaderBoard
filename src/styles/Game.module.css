@@ -1,29 +1,33 @@
-.customCol{
-    height: 93vh;
+.customCol {
+  height: 93vh;
 }
 
-.boardContaier{
-    max-width: 85vh;
-    margin-top: 4vh;
+.boardContaier {
+  max-width: 85vh;
+  margin-top: 4vh;
 }
 
-.bgMain{
-    background-color: #212529;
+.bgMain {
+  background-color: #212529;
+}
+
+.activeInfo {
+  background-color: #20e7c1;
+}
+
+.scrollMenu {
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
 }
 
 ::-webkit-scrollbar {
-    display: none;
-    -ms-overflow-style: none;
-    overflow: -moz-scrollbars-none;
+  display: none;
 }
 
-.activeInfo{
-    background-color:#20E7C1;
-}
-
-.scrollMenu{
-    overflow: auto;
-    max-height: 50vh;
-    position: relative;
-    border-radius: 1rem;
+.scrollContent {
+  background-color: #fff;
+  border-radius: 0.3rem;
+  position: relative;
+  max-height: 50vh;
+  overflow: auto;
 }

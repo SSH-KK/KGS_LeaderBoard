@@ -40,6 +40,7 @@ export const useGame = (
 
           return {
             boardState: boardState.stones,
+            loc: { x, y: fetchedGame.gameSummary.size - y },
             color: convertStringToColor(color),
           }
         })

@@ -1,4 +1,6 @@
+import javascript
 from browser import window
+
 BLACK = True
 WHITE = False
 
@@ -60,7 +62,7 @@ class GoLogic(object):
     for j in range(self.size):
       for i in range(self.size):
         if self.board[j][i] is None:
-          colors[j][i] = None
+          colors[j][i] = javascript.NULL
         else:
           colors[j][i] = self.board[j][i].color
     return colors
@@ -147,10 +149,14 @@ class GoLogic(object):
     for j in range(self.size):
       for i in range(self.size):
         color = self.territory[j][i]
+        if color is None:
+          continue
+        color = int(color)
         if self.board[j][i] is not None:
           self.score[color] = self.score[color] + 2
         else:
           self.score[color] = self.score[color] + 1
+    return self.score
 
 
 boards = {}
@@ -177,7 +183,7 @@ def get_data(tid):
   return board.get_data()
 
 
-def score(tid):
+def get_score(tid):
   board = boards.get(tid)
   if not board:
     return None
@@ -187,4 +193,4 @@ def score(tid):
 window.place = place
 window.get_data = get_data
 window.create_board = create_board
-window.get_score = score
+window.get_score = get_score

@@ -147,17 +147,18 @@ class GoLogic(object):
     for j in range(self.size):
       for i in range(self.size):
         color = self.territory[j][i]
-        if self.board[j][i] is not None:
-          self.score[color] = self.score[color] + 2
-        else:
-          self.score[color] = self.score[color] + 1
+        if color is not None:
+          if self.board[j][i] is not None:
+            self.score[color] = self.score[color] + 2
+          else:
+            self.score[color] = self.score[color] + 1
 
 
 boards = {}
 
 
-def create_board(tid, n):
-  boards[tid] = GoLogic(n)
+def create_board(tid, size):
+  boards[tid] = GoLogic(size)
   return boards[tid].get_data()
 
 
@@ -181,10 +182,13 @@ def score(tid):
   board = boards.get(tid)
   if not board:
     return None
-  return board.compute_score()
+  board.compute_score()
+  return board.get_data()['score']
 
 
-window.place = place
-window.get_data = get_data
-window.create_board = create_board
-window.get_score = score
+window.game = {}
+
+window.game.createBoard = create_board
+window.game.getData = get_data
+window.game.getScore = score
+window.game.place = place

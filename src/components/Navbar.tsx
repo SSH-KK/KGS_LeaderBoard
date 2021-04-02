@@ -1,9 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import styles from '@styles/Navbar.module.css'
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav
+      className={`${styles.fixedNav} navbar navbar-expand-md navbar-dark bg-dark`}
+    >
       <div className="container-fluid">
         <Link to="/" className="navbar-brand fw-bold">
           KGS LeaderBoard

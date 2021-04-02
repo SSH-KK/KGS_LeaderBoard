@@ -1,0 +1,29 @@
+.customCol{
+    height: 93vh;
+}
+
+.boardContaier{
+    max-width: 85vh;
+    margin-top: 4vh;
+}
+
+.bgMain{
+    background-color: #212529;
+}
+
+::-webkit-scrollbar {
+    display: none;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+}
+
+.activeInfo{
+    background-color:#20E7C1;
+}
+
+.scrollMenu{
+    overflow: auto;
+    max-height: 50vh;
+    position: relative;
+    border-radius: 1rem;
+}

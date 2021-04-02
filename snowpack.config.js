@@ -9,6 +9,7 @@ module.exports = {
     '@snowpack/plugin-react-refresh',
     '@snowpack/plugin-dotenv',
     '@snowpack/plugin-typescript',
+    "snowpack-plugin-svgr"
   ],
   routes: [{ match: 'routes', src: '.*', dest: '/index.html' }],
   optimize: {
@@ -24,6 +25,7 @@ module.exports = {
     '@components': path.join(__dirname, 'src/components'),
     '@hooks': path.join(__dirname, 'src/hooks'),
     '@config': path.join(__dirname, 'src/configs'),
+    '@icons': path.join(__dirname, 'src/icons'),
   },
   exclude: ['**/node_modules/**/*', '**/*.test.*', '**/*.stories.*'],
 }

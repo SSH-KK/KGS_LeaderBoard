@@ -20,7 +20,7 @@ const StyledIntersection = styled.div<StyledIntersectionProps>`
   width: ${(props) => 100 / props.size}%;
 
   :before {
-    border-top: 1px solid #a78a48;
+    border-top: 1px solid #9B9D97;
     width: 100%;
     display: block;
     content: '';
@@ -30,7 +30,7 @@ const StyledIntersection = styled.div<StyledIntersectionProps>`
   }
 
   :after {
-    border-left: 1px solid #a78a48;
+    border-left: 1px solid #9B9D97;
     height: 100%;
     display: block;
     content: '';
@@ -46,7 +46,7 @@ const StarDot = styled.div`
   height: 25%;
   width: 25%;
   border-radius: 100%;
-  background-color: #957b40;
+  background-color: #9B9D97;
   top: 50%;
   left: 50%;
   margin-left: -12.5%;

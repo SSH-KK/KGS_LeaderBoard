@@ -18,7 +18,7 @@ export const Board = ({ size, state }: IBoardProps) => {
       <Inner>
         <BoardCoord size={size}>
           {['top', 'bottom'].map((pos) => (
-            <div key={`${pos}coord`} className={pos}>
+            <div key={`${pos}coord`} className={`board${pos}`}>
               {Array(size)
                 .fill('')
                 .map((_, i) => (
@@ -29,7 +29,7 @@ export const Board = ({ size, state }: IBoardProps) => {
             </div>
           ))}
           {['left', 'right'].map((pos) => (
-            <div key={`${pos}coord`} className={pos}>
+            <div key={`${pos}coord`} className={`board${pos}`}>
               {Array(size)
                 .fill('')
                 .map((_, i) => (
@@ -44,7 +44,7 @@ export const Board = ({ size, state }: IBoardProps) => {
           {Array(size)
             .fill('')
             .map((_, rowIndex) => (
-              <div key={`${rowIndex}row`} className="row">
+              <div key={`${rowIndex}row`} className="boardRow">
                 {Array(size)
                   .fill('')
                   .map((_, columnIndex) => (

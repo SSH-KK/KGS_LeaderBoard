@@ -4,7 +4,8 @@ export const Container = styled.div`
   position: relative;
   width: 100%;
   padding-top: 100%;
-  background-color: #dfbd6d;
+  background-color: #212529;
+  border-radius: 0.25rem;
 `
 
 export const Inner = styled.div`
@@ -26,17 +27,17 @@ export const BoardCoord = styled.div<IBoardCoordProps>`
   bottom: 0;
   right: 0;
 
-  .top,
-  .left,
-  .bottom,
-  .right {
+  .boardtop,
+  .boardleft,
+  .boardbottom,
+  .boardright {
     position: absolute;
     text-align: center;
-    color: #a78a48;
+    color: #9B9D97;
   }
 
-  .top,
-  .bottom {
+  .boardtop,
+  .boardbottom {
     left: ${(props) => 100 / (props.size + 2)}%;
     right: ${(props) => 100 / (props.size + 2)}%;
 
@@ -45,36 +46,33 @@ export const BoardCoord = styled.div<IBoardCoordProps>`
     }
   }
 
-  .left,
-  .right {
+  .boardleft,
+  .boardright {
     top: ${(props) => 100 / (props.size + 2)}%;
     width: ${(props) => 100 / (props.size + 2)}%;
     bottom: ${(props) => 100 / (props.size + 2)}%;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 
     .caption {
-      padding-top: 25%;
-      height: ${(props) => 100 / props.size}%;
       width: 100%;
     }
   }
 
-  .top {
-    top: calc(${(props) => 100 / (props.size + 2) / 2}% - 9px);
+  .boardbottom {
+    bottom: calc(${(props) => 100 / (props.size + 10) / 2}% - 9px);
   }
 
-  .bottom {
-    bottom: calc(${(props) => 100 / (props.size + 2) / 2}% - 9px);
-  }
-
-  .right {
+  .boardright {
     right: 0;
   }
 
   .caption {
     box-sizing: border-box;
     width: ${(props) => 100 / props.size}%;
-    font-size: 18px;
+    font-size: 1.25rem;
     text-align: center;
     vertical-align: sub;
   }
@@ -92,7 +90,7 @@ export const BoardInner = styled.div<IBoardInnerProps>`
       ''
     )}
 
-  .row {
+  .boardRow {
     height: ${(props) => 100 / props.size}%;
   }
 `

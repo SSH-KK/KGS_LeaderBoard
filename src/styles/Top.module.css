@@ -14,10 +14,10 @@
   background-color: black;
   border: 2px solid white;
 }
-.hoveredLink{
+.hoveredLink {
   transition: color 0.3s;
 }
 
-.hoveredLink:hover{
-  color: #9B9D97
+.hoveredLink:hover {
+  color: #9b9d97;
 }

@@ -1,12 +1,17 @@
-import { CreateBoard, GetData, GetScore, PlaceStone } from './pyGame'
+import {
+  PyCreateBoard,
+  PyGetData,
+  PyGetScore,
+  PyPlaceStone,
+} from '.@type/pyGame'
 
 declare global {
   interface Window {
-    game: {
-      createBoard: CreateBoard
-      getData: GetData
-      getScore: GetScore
-      place: PlaceStone
+    py: {
+      createBoard: PyCreateBoard
+      getData: PyGetData
+      getScore: PyGetScore
+      place: PyPlaceStone
     }
   }
 }

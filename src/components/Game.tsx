@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { ChangeEvent, useEffect } from 'react'
 
 import { useBoardState } from '@hooks/useBoardState'
 import { useGame } from '@hooks/useGame'
@@ -37,6 +37,10 @@ export const Game = (args: IGameProps) => {
     if (currentStep > 0) seekToStep(currentStep - 1)
   }
 
+  const handleRange = (e: ChangeEvent<HTMLInputElement>) => {
+    seekToStep(parseInt(e.target.value))
+  }
+
   return (
     <Loader loading={loading}>
       <div className="container-fluid">
@@ -63,13 +67,14 @@ export const Game = (args: IGameProps) => {
                   max={fetchedState.events.length}
                   step="1"
                   id="customRange"
-                  value={fetchedState.events.length}
+                  value={currentStep}
+                  onChange={handleRange}
                 />
                 <label
                   htmlFor="customRange"
                   className="form-label text-white fs-5"
                 >
-                  Game step: {currentStep + 1}
+                  Game step: {currentStep + 1}/{steps.length}
                 </label>
               </div>
               <div className="col-12 mb-2">
@@ -82,6 +87,7 @@ export const Game = (args: IGameProps) => {
                     type="button"
                     className="btn btn-lg btn-primary border-end border-2 d-flex justify-content-center text-white"
                     onClick={goPrev}
+                    disabled={currentStep == 0}
                   >
                     <LeftArrow />
                   </button>
@@ -89,6 +95,7 @@ export const Game = (args: IGameProps) => {
                     type="button"
                     className="btn btn-lg btn-primary border-start border-2 d-flex justify-content-center text-white"
                     onClick={goNext}
+                    disabled={currentStep == steps.length - 1}
                   >
                     <RightArrow />
                   </button>

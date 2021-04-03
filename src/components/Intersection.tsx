@@ -7,7 +7,7 @@ import { IntersectionState } from '@type/board'
 export interface IntersectionProps extends StyledIntersectionProps {
   position: [number, number]
   state: IntersectionState
-  last: Boolean
+  last: boolean
 }
 
 interface StyledIntersectionProps {

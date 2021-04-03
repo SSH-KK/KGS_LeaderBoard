@@ -7,7 +7,7 @@ import Loader from '@components/Loader'
 import styles from '@styles/Top.module.css'
 
 type TopProps = {
-  isAuth: Boolean
+  isAuth: boolean
 }
 
 const Top: React.FC<TopProps> = ({ isAuth }) => {

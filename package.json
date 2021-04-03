@@ -3,7 +3,7 @@
     "dev": "snowpack dev",
     "build": "snowpack build",
     "format": "prettier --config .prettierrc --write .",
-    "lint": "eslint --config .eslintrc --ext js,jsx,ts,tsx .",
+    "lint": "eslint --config .eslintrc --fix --ext js,jsx,ts,tsx .",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -40,6 +40,7 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.23.1",
+    "husky": "^6.0.0",
     "prettier": "^2.0.5",
     "snowpack": "^3.0.1",
     "snowpack-plugin-svgr": "^0.1.2",

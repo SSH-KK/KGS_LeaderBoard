@@ -12,7 +12,7 @@ type MatchParams = {
 
 export interface IGameProps {
   match: match<MatchParams>
-  isAuth: Boolean
+  isAuth: boolean
 }
 
 const GameView: React.FC<IGameProps> = ({ match, isAuth }) => {

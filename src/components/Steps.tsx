@@ -16,7 +16,7 @@ export const Steps = ({ currentStep, steps }: IStepsProps) => {
 
   useEffect(() => {
     if (scrollMenu.current && scrollMenu.current.offsetParent) {
-      let new_scroll =
+      const new_scroll =
         (steps.length - currentStep) *
           (scrollMenu.current.offsetHeight / steps.length) -
         scrollMenu.current.offsetParent.clientHeight / 2

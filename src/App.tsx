@@ -6,7 +6,7 @@ import Top from '@components/Top'
 import Login from '@components/Login'
 
 const App: React.FC = () => {
-  const [isAuth, setIsAuth] = useState<Boolean>(false)
+  const [isAuth, setIsAuth] = useState<boolean>(false)
 
   return (
     <BrowserRouter>

@@ -4,8 +4,8 @@ import useHttp from '@hooks/useHttp'
 import styles from '@styles/Login.module.css'
 
 type LoginProps = {
-  isAuth: Boolean
-  setIsAuth: React.Dispatch<React.SetStateAction<Boolean>>
+  isAuth: boolean
+  setIsAuth: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const Login: React.FC<LoginProps> = ({ isAuth, setIsAuth }) => {

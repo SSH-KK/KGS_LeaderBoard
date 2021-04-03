@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import styles from '@styles/Navbar.module.css'
 
 type NavBarProps = {
-  isAuth: Boolean
+  isAuth: boolean
 }
 
 const Navbar: React.FC<NavBarProps> = ({ isAuth }) => {

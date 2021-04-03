@@ -15,9 +15,6 @@ export interface IBoardProps {
 const startCharCode = ALPHABET_START_CHAR.charCodeAt(0)
 
 export const Board = ({ size, state, lastStep }: IBoardProps) => {
-  useEffect(()=>{
-    console.log(Object.values(lastStep.loc))
-  })
   return (
     <Container>
       <Inner>

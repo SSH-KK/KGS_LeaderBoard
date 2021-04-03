@@ -1,7 +1,7 @@
 import { ALPHABET_START_CHAR } from '@config/boardConfig'
 import { IntersectionState } from '@type/board'
 import { GameStepT } from '@type/game'
-import React from 'react'
+import React,{createRef, useEffect} from 'react'
 import styles from '@styles/Game.module.css'
 
 export interface IStepsProps {
@@ -12,8 +12,18 @@ export interface IStepsProps {
 const startCharCode = ALPHABET_START_CHAR.charCodeAt(0)
 
 export const Steps = ({ currentStep, steps }: IStepsProps) => {
+  const scrollMenu = createRef<HTMLDivElement>()
+
+  useEffect(()=>{
+    console.log('CHANGE STEP')
+    if(scrollMenu.current && scrollMenu.current.offsetParent){
+      let new_scroll = (steps.length-currentStep)*(scrollMenu.current.offsetHeight/steps.length)-scrollMenu.current.offsetParent.clientHeight/2
+      scrollMenu.current.offsetParent.scrollTop = new_scroll
+    }
+  },[currentStep])
+
   return (
-    <div className={`d-flex flex-column text-secondary ${styles.roundedMenu}`}>
+    <div ref={scrollMenu} className={`d-flex flex-column text-secondary ${styles.roundedMenu}`}>
       {steps
         .slice()
         .reverse()

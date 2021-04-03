@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect } from 'react'
+import React, { ChangeEvent } from 'react'
 
 import { useBoardState } from '@hooks/useBoardState'
 import { useGame } from '@hooks/useGame'

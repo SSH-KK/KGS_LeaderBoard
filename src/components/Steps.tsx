@@ -15,7 +15,6 @@ export const Steps = ({ currentStep, steps }: IStepsProps) => {
   const scrollMenu = createRef<HTMLDivElement>()
 
   useEffect(()=>{
-    console.log('CHANGE STEP')
     if(scrollMenu.current && scrollMenu.current.offsetParent){
       let new_scroll = (steps.length-currentStep)*(scrollMenu.current.offsetHeight/steps.length)-scrollMenu.current.offsetParent.clientHeight/2
       scrollMenu.current.offsetParent.scrollTop = new_scroll

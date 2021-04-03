@@ -47,7 +47,7 @@ export const Game = (args: IGameProps) => {
         <div className="row">
           <div className={`${styles.customCol} col-md-9`}>
             <div className={`${styles.boardContaier} mx-auto`}>
-              <Board size={fetchedState.gameSummary.size} state={board} />
+              <Board size={fetchedState.gameSummary.size} state={board} lastStep={steps[currentStep]} />
             </div>
           </div>
           <div className={`${styles.bgMain} col-md-3`}>

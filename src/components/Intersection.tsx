@@ -7,6 +7,7 @@ import { IntersectionState } from '@type/board'
 export interface IntersectionProps extends StyledIntersectionProps {
   position: [number, number]
   state: IntersectionState
+  last: Boolean
 }
 
 interface StyledIntersectionProps {
@@ -53,6 +54,18 @@ const StarDot = styled.div`
   margin-top: -12.5%;
   z-index: 500;
 `
+const LastLint = styled.div`
+  position: absolute;
+  height: 30%;
+  width: 30%;
+  border-radius: 100%;
+  background-color: #20E7C1;
+  top: 50%;
+  left: 50%;
+  margin-left: -15%;
+  margin-top: -15%;
+  z-index: 1000;
+`
 
 const checkIsStar = (size: number, x: number, y: number) => {
   if (size == 19)
@@ -82,6 +95,7 @@ export const Intersection = (args: IntersectionProps) => {
     <StyledIntersection size={size}>
       {isStar && <StarDot />}
       {state != IntersectionState.EMPTY && <Stone colour={state} />}
+      {args.last && <LastLint/>}
     </StyledIntersection>
   )
 }

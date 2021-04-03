@@ -25,7 +25,7 @@ export const Steps = ({ currentStep, steps }: IStepsProps) => {
                 index != steps.length - 1 ? 'border-bottom border-2' : ''
               } text-center ${
                 index === steps.length - currentStep - 1
-                  ? `${styles.activeInfo} bg-info`
+                  ? `${styles.activeInfo}`
                   : 'bg-light'
               }`}
             >

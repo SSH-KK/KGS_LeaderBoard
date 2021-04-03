@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 
 import { BoardCoord, BoardInner, Container, Inner } from './Board.styles'
 import { ALPHABET_START_CHAR } from '@config/boardConfig'
 import { Intersection } from '@components/Intersection'
 import { BoardT } from '@type/board'
-import {GameStepT} from '@type/game'
+import { GameStepT } from '@type/game'
 
 export interface IBoardProps {
   size: number
@@ -55,7 +55,10 @@ export const Board = ({ size, state, lastStep }: IBoardProps) => {
                       size={size}
                       position={[rowIndex, columnIndex]}
                       state={state[rowIndex][columnIndex]}
-                      last={Object.values(lastStep.loc).toString() == [columnIndex, size-rowIndex].toString()}
+                      last={
+                        Object.values(lastStep.loc).toString() ==
+                        [columnIndex, size - rowIndex].toString()
+                      }
                     />
                   ))}
               </div>

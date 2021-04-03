@@ -59,7 +59,7 @@ const LastLint = styled.div`
   height: 30%;
   width: 30%;
   border-radius: 100%;
-  background-color: #20E7C1;
+  background-color: #20e7c1;
   top: 50%;
   left: 50%;
   margin-left: -15%;
@@ -95,7 +95,7 @@ export const Intersection = (args: IntersectionProps) => {
     <StyledIntersection size={size}>
       {isStar && <StarDot />}
       {state != IntersectionState.EMPTY && <Stone colour={state} />}
-      {args.last && <LastLint/>}
+      {args.last && <LastLint />}
     </StyledIntersection>
   )
 }

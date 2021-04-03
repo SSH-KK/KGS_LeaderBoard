@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { match } from 'react-router-dom'
+import { match, Redirect } from 'react-router-dom'
 
 import { IFetchedGame } from '@type/fetch'
 import useHttp from '@hooks/useHttp'
@@ -12,18 +12,22 @@ type MatchParams = {
 
 export interface IGameProps {
   match: match<MatchParams>
+  isAuth: Boolean
 }
 
-const GameView = ({ match }: IGameProps) => {
+const GameView: React.FC<IGameProps> = ({ match, isAuth }) => {
   const { request, loading, error } = useHttp()
 
   const [state, setState] = useState<IFetchedGame>()
 
   useEffect(() => {
-    request<IFetchedGame>(
-      `/game/${match.params.game_timestamp}`,
-      'GET'
-    ).then((tdata) => setState(tdata))
+    if (isAuth) {
+      request<IFetchedGame>(`/game/${match.params.game_timestamp}`, 'GET')
+        .then((tdata) => setState(tdata))
+        .catch((e) => {
+          console.log(e)
+        })
+    }
   }, [])
 
   if (error)
@@ -33,7 +37,9 @@ const GameView = ({ match }: IGameProps) => {
       </div>
     )
   else
-    return (
+    return !isAuth ? (
+      <Redirect to="/" />
+    ) : (
       <Loader loading={loading || !state}>
         <Game
           state={state as IFetchedGame}

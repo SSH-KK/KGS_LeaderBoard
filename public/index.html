@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Snowpack App</title>
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython_stdlib.js"></script>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Snowpack App</title>
-  <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython.min.js">
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/brython@3.9.0/brython_stdlib.js">
-  </script>
-</head>
-
-<body>
-  <div id="root"></div>
-  <script type="text/python" src="gologic.py"></script>
-  <script type="module" src="/build/index.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => brython({ debug: 1 }));
-  </script>
-</body>
-
+  <body>
+    <div id="root"></div>
+    <script type="text/python" src="gologic.py"></script>
+    <script type="module" src="/build/index.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => brython({ debug: 1 }))
+    </script>
+  </body>
 </html>

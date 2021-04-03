@@ -12,6 +12,7 @@ export type UseHttpReturnT = {
   request: RequestFT
   loading: boolean
   error: unknown
+  setError: React.Dispatch<unknown>
 }
 
 const useHttp = (): UseHttpReturnT => {
@@ -34,16 +35,15 @@ const useHttp = (): UseHttpReturnT => {
         setLoading(false)
         return data
       } catch (e) {
-        console.log('WAS ERROR')
-        console.log(e)
         setError(e)
         setLoading(false)
+        throw new Error(e)
       }
     },
     []
   )
 
-  return { request, loading, error }
+  return { request, loading, error, setError }
 }
 
 export default useHttp

@@ -1,32 +1,44 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 import UseHttp from '@hooks/useHttp'
 import { UserTopT } from '@type/top'
 import Loader from '@components/Loader'
 import styles from '@styles/Top.module.css'
 
-const Top: React.FC = () => {
+type TopProps = {
+  isAuth: Boolean
+}
+
+const Top: React.FC<TopProps> = ({ isAuth }) => {
   const [top, setTop] = useState<UserTopT[]>([])
   const [floaded, setFloaded] = useState<boolean>(false)
   const { request, loading, error } = UseHttp()
 
   useEffect(() => {
-    request<UserTopT[]>('/get_top', 'GET').then((tdata) => {
-      setTop(tdata)
-      setFloaded(true)
-    })
-    const getTop = setInterval(async () => {
-      const data = await request<UserTopT[]>('/get_top', 'GET')
-      if (data != top) {
-        setTop(data)
+    if (isAuth) {
+      request<UserTopT[]>('/get_top', 'GET')
+        .then((tdata) => {
+          setTop(tdata)
+          setFloaded(true)
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+      const getTop = setInterval(async () => {
+        const data = await request<UserTopT[]>('/get_top', 'GET')
+        if (data != top) {
+          setTop(data)
+        }
+      }, 1000 * 40)
+      return () => {
+        clearInterval(getTop)
       }
-    }, 1000 * 40)
-    return () => {
-      clearInterval(getTop)
     }
   }, [])
-  return (
+  return !isAuth ? (
+    <Redirect to="/" />
+  ) : (
     <Loader loading={!floaded && !error}>
       <div className="container-md px-0 mt-md-3">
         <table className="table table-dark table-striped">

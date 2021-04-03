@@ -2,7 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from '@styles/Navbar.module.css'
 
-const Navbar: React.FC = () => {
+type NavBarProps = {
+  isAuth: Boolean
+}
+
+const Navbar: React.FC<NavBarProps> = ({ isAuth }) => {
   return (
     <nav
       className={`${styles.fixedNav} navbar navbar-expand-md navbar-dark bg-dark`}
@@ -25,9 +29,15 @@ const Navbar: React.FC = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link to="/top" className="nav-link">
-                TOP 100
-              </Link>
+              {isAuth ? (
+                <Link to="/top" className="nav-link">
+                  TOP 100
+                </Link>
+              ) : (
+                <Link to="/" className="nav-link">
+                  Login
+                </Link>
+              )}
             </li>
           </ul>
         </div>

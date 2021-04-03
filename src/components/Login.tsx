@@ -4,33 +4,38 @@ import useHttp from '@hooks/useHttp'
 import styles from '@styles/Login.module.css'
 
 type LoginProps = {
-  isAuth: boolean
-  setIsAuth: React.Dispatch<React.SetStateAction<boolean>>
+  isAuth: Boolean
+  checkIsAuth: ()=>Promise<Boolean>
 }
 
-const Login: React.FC<LoginProps> = ({ isAuth, setIsAuth }) => {
+const Login: React.FC<LoginProps> = ({ isAuth, checkIsAuth }) => {
   const { request, loading, error, setError } = useHttp()
   const [fromState, setFormState] = useState({
     username: '',
     password: '',
   })
 
-  const formSubmit = (e: ChangeEvent<HTMLFormElement>) => {
-    console.log('subim')
+  const formSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
-    request('/login', 'POST', JSON.stringify(fromState))
-      .then(() => {
-        if (!error) {
-          setIsAuth(true)
-        }
-      })
-      .catch((e) => {
+    try{
+      await request('/login', 'POST', JSON.stringify(fromState))
+      await new Promise((resolve)=>(setTimeout(resolve,1000*1.5)))
+      if(!await checkIsAuth()){
         setFormState({
           username: '',
           password: '',
         })
-        console.log(e)
+        setError('Invalid login data')
+        throw new Error('Invalid login data')
+      }
+    }
+    catch(e){
+      setFormState({
+        username: '',
+        password: '',
       })
+      console.log(e)
+    }
   }
 
   const formInputchange = (e: ChangeEvent<HTMLInputElement>) => {

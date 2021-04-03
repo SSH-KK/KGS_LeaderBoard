@@ -4,9 +4,10 @@ import styles from '@styles/Navbar.module.css'
 
 type NavBarProps = {
   isAuth: boolean
+  makeLogout: (event: React.MouseEvent<HTMLButtonElement>)=>void
 }
 
-const Navbar: React.FC<NavBarProps> = ({ isAuth }) => {
+const Navbar: React.FC<NavBarProps> = ({ isAuth, makeLogout }) => {
   return (
     <nav
       className={`${styles.fixedNav} navbar navbar-expand-md navbar-dark bg-dark`}
@@ -41,6 +42,13 @@ const Navbar: React.FC<NavBarProps> = ({ isAuth }) => {
             </li>
           </ul>
         </div>
+        {
+          isAuth ? (
+            <button type="button" onClick={makeLogout} className="btn btn-outline-danger">Logout</button>
+          )
+          :
+          ''
+        }
       </div>
     </nav>
   )

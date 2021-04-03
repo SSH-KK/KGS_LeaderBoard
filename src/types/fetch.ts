@@ -16,7 +16,7 @@ export type LastGameT = {
     }
   }
   handicap: number
-  timestamp: Date
+  timestamp: string
 }
 
 export type GameSummaryT = {

@@ -22,7 +22,8 @@ const GameView: React.FC<IGameProps> = ({ match, isAuth }) => {
 
   useEffect(() => {
     if (isAuth) {
-      request<IFetchedGame>(`/game/${match.params.game_timestamp}`, 'GET')
+      const timestamp = atob(match.params.game_timestamp)
+      request<IFetchedGame>(`/game/${timestamp}`, 'GET')
         .then((tdata) => setState(tdata))
         .catch((e) => {
           console.log(e)

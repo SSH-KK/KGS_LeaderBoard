@@ -12,8 +12,8 @@ export const App = () => {
   const [responsePull, doRequest] = useAPI('dm1sh', 'vp5s27', reducer)
 
   useEffect(() => {
-    ;(async () => console.log(await getTop(putDB)))()
-  }, [])
+    if (connected) (async () => console.log(await getTop(putDB)))()
+  }, [connected])
 
   return (
     <div>

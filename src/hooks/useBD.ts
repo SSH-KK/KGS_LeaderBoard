@@ -21,11 +21,11 @@ const useDB = () => {
   }
 
   const putDB: putDBT = useCallback(
-    (store_name, key, obj) => {
+    (store_name, obj) => {
       return new Promise((resolve, reject) => {
         if (db) {
           const store = createDBStore(store_name)
-          const store_request = store.put(obj, key)
+          const store_request = store.put(obj)
 
           store_request.onsuccess = () => {
             resolve(true)

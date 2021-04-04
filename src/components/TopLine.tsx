@@ -11,7 +11,7 @@ export const TopLine: React.FC<ITopLineProps> = ({ user }) => {
   return (
     <tr className="align-middle">
       <th className="fs-5">
-        {user.place}: {user.name}
+        {user.place}: {user.username}
       </th>
       <td>
         <div className="row">

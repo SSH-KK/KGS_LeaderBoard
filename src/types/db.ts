@@ -1,8 +1,4 @@
-export type putDBT = <T>(
-  store_name: string,
-  key: string | number,
-  obj: T
-) => Promise<true | Error>
+export type putDBT = <T>(store_name: string, obj: T) => Promise<true | Error>
 
 export type getDBT = <T>(store_name: string, key: string | number) => Promise<T>
 

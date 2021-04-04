@@ -1,7 +1,7 @@
 import { LastGameT } from './fetch'
 
 export type TopUserInfoT = {
-  name: string
+  username: string
   rank: string
   place: number
   games: LastGameT[]

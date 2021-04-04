@@ -2,7 +2,7 @@
 var isLoggedIn = false
 
 // Upload an upstream (client-to-server) message to KGS.
-function uploadKgsMessage() {
+export function uploadKgsMessage() {
   var responseElement = document.getElementById('reqStatus')
   responseElement.innerHTML = '-'
 

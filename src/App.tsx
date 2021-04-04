@@ -1,8 +1,19 @@
 import { useAPI } from '@hooks/useAPI'
-import React from 'react'
+import { getTop } from '@utils/getTop'
+import useBD from '@hooks/useBD'
+import React, { useEffect } from 'react'
+import { reducerConstructor } from '@utils/messageReducer'
 
 export const App = () => {
-  const [responsePull] = useAPI('dm1sh', 'vp5s27')
+  const { connected, deleteDB, getDB, listDB, putDB } = useBD()
+
+  const reducer = reducerConstructor({ get: getDB, put: putDB })
+
+  const [responsePull, doRequest] = useAPI('dm1sh', 'vp5s27', reducer)
+
+  useEffect(() => {
+    ;(async () => console.log(await getTop(putDB)))()
+  }, [])
 
   return (
     <div>

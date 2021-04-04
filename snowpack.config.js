@@ -1,8 +1,12 @@
 const path = require('path')
-const proxy = require('http-proxy').createServer({target: 'http://www.gokgs.com'});
-
+const proxy = require('http-proxy').createServer({
+  target: 'http://www.gokgs.com',
+})
 
 module.exports = {
+  packageOptions: {
+    polyfillNode: true,
+  },
   mount: {
     public: { url: '/', static: true },
     src: { url: '/build' },
@@ -11,15 +15,23 @@ module.exports = {
     '@snowpack/plugin-react-refresh',
     '@snowpack/plugin-dotenv',
     '@snowpack/plugin-typescript',
-    "snowpack-plugin-svgr"
+    'snowpack-plugin-svgr',
   ],
   routes: [{ match: 'routes', src: '.*', dest: '/index.html' }],
-  routes: [{
-    src: '/json-cors/access',
-    dest: (req, res) => {
-      proxy.web(req, res)
-    }
-  }
+  routes: [
+    {
+      src: '/json-cors/access',
+      dest: (req, res) => {
+        proxy.web(req, res)
+      },
+    },
+    {
+      src: '/api/top',
+      dest: (req, res) => {
+        req.url = req.url.replace(/^\/api\/top/, '/top100.jsp')
+        proxy.web(req, res)
+      },
+    },
   ],
   optimize: {
     bundle: true,

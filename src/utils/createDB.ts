@@ -21,7 +21,7 @@ export const createDB: createDBT = () => {
 
     dbOpenRequest.onupgradeneeded = () => {
       console.log('UPGRADE DB')
-      let db = dbOpenRequest.result
+      const db = dbOpenRequest.result
       if (!db.objectStoreNames.contains('user')) {
         db.createObjectStore('user', { keyPath: 'id' })
       }

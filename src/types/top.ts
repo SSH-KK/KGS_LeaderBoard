@@ -1,8 +1,8 @@
 import { LastGameT } from './fetch'
 
-export type UserTopT = {
+export type TopUserInfoT = {
   name: string
   rank: string
   place: number
-  last: LastGameT[]
+  games: LastGameT[]
 }

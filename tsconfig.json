@@ -23,6 +23,6 @@
     "no-unused-variable": false,
     "noUnusedLocals": false,
     "allowSyntheticDefaultImports": true,
-    "types": ["node"]
+    "types": ["node", "mocha"]
   }
 }

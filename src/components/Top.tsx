@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Redirect } from 'react-router-dom'
 
 import UseHttp from '@hooks/useHttp'
-import { UserTopT } from '@type/top'
+import { TopUserInfoT } from '@type/top'
 import Loader from '@components/Loader'
 import { TopLine } from './TopLine'
 
@@ -11,13 +11,13 @@ export interface ITopProps {
 }
 
 const Top: React.FC<ITopProps> = ({ isAuth }) => {
-  const [top, setTop] = useState<UserTopT[]>([])
+  const [top, setTop] = useState<TopUserInfoT[]>([])
   const [floaded, setFloaded] = useState<boolean>(false)
   const { request, loading, error } = UseHttp()
 
   useEffect(() => {
     if (isAuth) {
-      request<UserTopT[]>('/get_top', 'GET')
+      request<TopUserInfoT[]>('/get_top', 'GET')
         .then((tdata) => {
           setTop(tdata)
           setFloaded(true)
@@ -27,7 +27,7 @@ const Top: React.FC<ITopProps> = ({ isAuth }) => {
         })
 
       const getTop = setInterval(async () => {
-        const data = await request<UserTopT[]>('/get_top', 'GET')
+        const data = await request<TopUserInfoT[]>('/get_top', 'GET')
         if (data != top) {
           setTop(data)
         }

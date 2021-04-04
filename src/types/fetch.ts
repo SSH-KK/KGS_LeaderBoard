@@ -1,3 +1,5 @@
+import { DownsteamMessage } from './messageTypes'
+
 export enum ReuestTypes {
   login = 'LOGIN',
 }
@@ -6,6 +8,7 @@ export enum ResponseTypes {
   loginSuccess = 'LOGIN_SUCCESS',
   noSuchUser = 'LOGIN_FAILED_NO_SUCH_USER',
   wrongPassword = 'LOGIN_FAILED_BAD_PASSWORD',
+  archiveJoin = 'ARCHIVE_JOIN',
 }
 
 export type UpstreamRequest = {
@@ -14,10 +17,6 @@ export type UpstreamRequest = {
 
 export type DownsteamResponse = {
   messages: DownsteamMessage[]
-}
-
-export type DownsteamMessage = {
-  type: ResponseTypes
 }
 
 export type LoginRequest = UpstreamRequest & {
@@ -31,6 +30,7 @@ export type LastGameT = {
   score: string
   komi: number
   size: number
+  inPlay?: true
   players: {
     white: {
       name: string

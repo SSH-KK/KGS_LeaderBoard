@@ -14,20 +14,41 @@ export const useAPI = (username: string, password: string) => {
 
   const getDownstram = useCallback(async () => {
     try {
-      const res = await fetch(GOKGS_URL, {
-        mode: 'cors',
-        method: 'GET',
-      })
+      const req = new XMLHttpRequest()
 
-      if (res.status === 200) {
-        const data = (await res.json()) as DownsteamResponse
+      req.onreadystatechange = () => {
+        if (req.readyState == 4) {
+          if (req.status == 200) {
+            const res = JSON.parse(req.responseText)
 
-        if (data.messages)
-          setResponsePull((prev) => [...prev, ...data.messages])
-      } else {
-        setIsLoggedIn(false)
-        throw new Error('LOGOUT')
+            if (res.messages) {
+              console.log(res.messages)
+            }
+
+            if (isLoggedIn) getDownstram()
+          }
+        }
       }
+
+      req.open('GET', GOKGS_URL, true)
+      // req.setRequestHeader('Accept', 'application/json;charset=UTF-8')
+      // req.withCredentials = true
+      req.send()
+
+      // const res = await fetch(GOKGS_URL, {
+      //   mode: 'cors',
+      //   method: 'GET',
+      // })
+
+      // if (res.status === 200) {
+      //   const data = (await res.json()) as DownsteamResponse
+
+      //   if (data.messages)
+      //     setResponsePull((prev) => [...prev, ...data.messages])
+      // } else {
+      //   setIsLoggedIn(false)
+      //   throw new Error('LOGOUT')
+      // }
     } catch (err) {
       console.error(err.message)
       if (err.message === 'LOGOUT') throw err
@@ -37,22 +58,42 @@ export const useAPI = (username: string, password: string) => {
   const doUpstream = useCallback(
     async <T extends UpstreamRequest>(msg: UpstreamRequest & T) => {
       try {
-        // await fetch(GOKGS_URL, { method: 'GET' })
-        const res = await fetch(GOKGS_URL, {
-          method: 'POST',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-          },
-          body: JSON.stringify(msg),
-        })
+        const req = new XMLHttpRequest()
 
-        if (res.status == 200) {
-          if (msg.type === ReuestTypes.login) {
-            setIsLoggedIn(true)
-            getDownstram()
+        req.onreadystatechange = () => {
+          if (req.readyState == 4) {
+            if (req.status == 200) {
+              if (msg.type === ReuestTypes.login) {
+                setIsLoggedIn(true)
+                getDownstram()
+                console.log(req.getAllResponseHeaders())
+              }
+            } else console.error(req.responseText)
           }
-        } else throw new Error(res.statusText)
+        }
+
+        req.open('POST', GOKGS_URL, true)
+        req.withCredentials = true
+        req.setRequestHeader('content-type', 'application/json;charset=UTF-8')
+
+        req.send(JSON.stringify(msg))
+        // // await fetch(GOKGS_URL, { method: 'GET' })
+        // const res = await fetch(GOKGS_URL, {
+        //   method: 'POST',
+        //   mode: 'cors',
+        //   credentials: 'include',
+        //   headers: {
+        //     'Content-Type': 'application/json;charset=UTF-8',
+        //   },
+        //   body: JSON.stringify(msg),
+        // })
+
+        // if (res.status == 200) {
+        //   if (msg.type === ReuestTypes.login) {
+        //     setIsLoggedIn(true)
+        //     getDownstram()
+        //   }
+        // } else throw new Error(res.statusText)
       } catch (err) {
         console.error(err.message)
         if (err.message === 'LOGOUT') throw err

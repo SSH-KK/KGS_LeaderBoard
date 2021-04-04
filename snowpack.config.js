@@ -1,4 +1,6 @@
 const path = require('path')
+const proxy = require('http-proxy').createServer({target: 'http://www.gokgs.com'});
+
 
 module.exports = {
   mount: {
@@ -12,6 +14,13 @@ module.exports = {
     "snowpack-plugin-svgr"
   ],
   routes: [{ match: 'routes', src: '.*', dest: '/index.html' }],
+  routes: [{
+    src: '/json-cors/access',
+    dest: (req, res) => {
+      proxy.web(req, res)
+    }
+  }
+  ],
   optimize: {
     bundle: true,
   },

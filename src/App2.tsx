@@ -17,12 +17,6 @@ const App: React.FC = () => {
       const { loggedIn } = await request('/is_logged', 'GET')
       setIsAuth(loggedIn)
       return loggedIn
-      // if(loggedIn){
-      //   setIsAuth(true)
-      //   return(true)
-      // }
-      // setIsAuth(false)
-      // return(false)
     } catch (e) {
       console.log(e)
       return false

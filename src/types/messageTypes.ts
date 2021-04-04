@@ -1,4 +1,4 @@
-import { LastGameT, ResponseTypes } from './fetch'
+import { GameSummaryT, LastGameT, ResponseTypes, sgfEvent } from './fetch'
 
 export type DownsteamMessage = {
   type: ResponseTypes
@@ -9,4 +9,9 @@ export type ArchiveJoinMessage = DownsteamMessage & {
     name: string
   }
   games: LastGameT[]
+}
+
+export type GameJoinMessage = DownsteamMessage & {
+  gameSummary: GameSummaryT
+  sgfEvents: sgfEvent[]
 }

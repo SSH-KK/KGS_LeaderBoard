@@ -13,8 +13,8 @@ const useDB = () => {
     })()
   }, [])
 
-  const createDBStore: createDBStoreT = (store_name) => {
-    if (db) {
+  const createDBStore:createDBStoreT = (store_name)=>{
+    if(db){
       return db.transaction(store_name, 'readwrite').objectStore(store_name)
     }
     throw new Error('DB was not found')
@@ -23,7 +23,7 @@ const useDB = () => {
   const putDB: putDBT = useCallback(
     (store_name, obj) => {
       return new Promise((resolve, reject) => {
-        if (db) {
+        if(db){
           const store = createDBStore(store_name)
           const store_request = store.put(obj)
 
@@ -43,7 +43,7 @@ const useDB = () => {
   const getDB: getDBT = useCallback(
     (store_name, key) => {
       return new Promise((resolve, reject) => {
-        if (db) {
+        if(db){
           const store = createDBStore(store_name)
           const store_request = store.get(key)
 
@@ -63,7 +63,7 @@ const useDB = () => {
   const listDB: listDBT = useCallback(
     (store_name) => {
       return new Promise((resolve, reject) => {
-        if (db) {
+        if(db){
           const store = createDBStore(store_name)
           const store_request = store.getAll()
 
@@ -83,7 +83,7 @@ const useDB = () => {
   const deleteDB: deleteDBT = useCallback(
     (store_name, key) => {
       return new Promise((resolve, reject) => {
-        if (db) {
+        if(db){
           const store = createDBStore(store_name)
           const store_request = store.delete(key)
 
@@ -100,7 +100,7 @@ const useDB = () => {
     [db]
   )
 
-  return { connected, putDB, getDB, listDB, deleteDB }
+  return {connected, putDB, getDB, listDB, deleteDB }
 }
 
 export default useDB

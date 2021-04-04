@@ -9,6 +9,7 @@ export enum ResponseTypes {
   noSuchUser = 'LOGIN_FAILED_NO_SUCH_USER',
   wrongPassword = 'LOGIN_FAILED_BAD_PASSWORD',
   archiveJoin = 'ARCHIVE_JOIN',
+  gameJoin = 'GAME_JOIN',
 }
 
 export type UpstreamRequest = {
@@ -61,11 +62,25 @@ export type PlayerT = {
 }
 
 export type FetchedEvent = {
-  position: [number, number]
+  position: [number, number] | string
   color: 'black' | 'white'
 }
 
 export interface IFetchedGame {
   gameSummary: GameSummaryT
   events: FetchedEvent[]
+}
+ 
+export type sgfEvent = {
+  type: string
+  nodeId: number
+  props:[
+    {
+      loc:{x:number,y: number} | string
+      color: 'black' | 'white'
+      name: string
+      float: number
+      int: number
+    }
+  ]  
 }

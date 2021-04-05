@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { BoardCoord, BoardInner, Container, Inner } from './Board.styles'
 import { ALPHABET_START_CHAR } from '@config/boardConfig'

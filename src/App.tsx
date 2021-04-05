@@ -9,16 +9,16 @@ export const App = () => {
   const { connected, deleteDB, getDB, listDB, putDB } = useBD()
   const [usersTop, setUsersTop] = useState<TopUserInfoT[]>([])
 
-  const reducer = useCallback(
-    reducerConstructor({ get: getDB, put: putDB }, setUsersTop),
-    [getDB, putDB]
-  )
+  const reducer = useCallback(reducerConstructor({ setTopList: setUsersTop }), [
+    getDB,
+    putDB,
+  ])
 
   const doRequest = useAPI('dm1sh', 'vp5s27', reducer)
 
   useEffect(() => {
     if (connected)
-      (async () => console.warn(await getTop(putDB, getDB, doRequest)))()
+      (async () => console.warn(await getTop(doRequest, setUsersTop)))()
   }, [connected])
 
   return (

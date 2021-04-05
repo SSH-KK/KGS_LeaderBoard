@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react'
 import { LastGameT } from './fetch'
 
 export type TopUserInfoT = {
@@ -6,3 +7,5 @@ export type TopUserInfoT = {
   place: number
   games: LastGameT[]
 }
+
+export type SetTopFT = Dispatch<SetStateAction<TopUserInfoT[]>>

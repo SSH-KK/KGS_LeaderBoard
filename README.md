@@ -69,7 +69,7 @@
 [![Watch the video](https://img.youtube.com/vi/7G2uMRbf9pM/maxresdefault.jpg)](https://youtu.be/7G2uMRbf9pM)
 
 ## Описание стека технологий и библиотек
-### JavaScript
+### NodeJS
 1. ReactJS
 2. TypeScript  
 

@@ -30,12 +30,17 @@ export const App = () => {
       const username = await get('user:login')
       const password = await get('user:password')
 
+      console.log(username, password)
+
       if (username && password) doLogin(username, password)
+      else setFirstLoginProcessing(false)
     })()
   }, [])
 
   useEffect(() => {
-    setFirstLoginProcessing(false)
+    console.log(logInError)
+    if (logInError != undefined) setFirstLoginProcessing(false)
+    if (isLoggedIn) setFirstLoginProcessing(false)
   }, [logInError, isLoggedIn])
 
   const [doLogin, doRequest] = useAPI(isLoggedIn, setIsLoggedIn, reducer)
@@ -80,7 +85,13 @@ export const App = () => {
           <Route
             exact
             path="/game/:game_timestamp"
-            render={({ match }) => <GameView doRequest={doRequest} isAuth={isLoggedIn} match={match} />}
+            render={({ match }) => (
+              <GameView
+                doRequest={doRequest}
+                isAuth={isLoggedIn}
+                match={match}
+              />
+            )}
           />
           <Route path="*" render={() => <h1>NOT FOUND</h1>} />
         </Switch>

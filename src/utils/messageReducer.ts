@@ -49,11 +49,9 @@ export const reducerConstructor = (
     }
 
     if (isNoSuchUser(message))
-      login.setLoginError(
-        'Нет такого пользователя, проверьте логин и попробуйте ещё раз'
-      )
+      login.setLoginError('No such user. Recheck if and try again')
 
-    if (isWrongPassword(message)) login.setLoginError('Неправильный пароль')
+    if (isWrongPassword(message)) login.setLoginError('Wrong passsword')
 
     if (isLoginSuccess(message)) login.setIsLoggedIn(true)
 

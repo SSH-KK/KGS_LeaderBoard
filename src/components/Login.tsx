@@ -76,6 +76,7 @@ const Login: React.FC<LoginProps> = ({
             <h2 className="mb-2">Login</h2>
             <div className="input-group mb-3">
               <input
+                required
                 onChange={formInputchange}
                 value={formState['username']}
                 type="text"
@@ -87,6 +88,7 @@ const Login: React.FC<LoginProps> = ({
             </div>
             <div className="input-group mb-3">
               <input
+                required
                 onChange={formInputchange}
                 value={formState['password']}
                 type="password"

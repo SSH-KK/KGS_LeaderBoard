@@ -19,23 +19,22 @@ export interface IGameProps {
 }
 
 const GameView: React.FC<IGameProps> = ({ match, isAuth, doRequest }) => {
-
   const [state, setState] = useState<IFetchedGame>()
   const [loading, setLoading] = useState<boolean>(true)
 
-  useEffect(()=>{
-    if(isAuth){
+  useEffect(() => {
+    if (isAuth) {
       const timestamp = atob(match.params.game_timestamp)
-      getGame(doRequest,timestamp)
-      .then((tdata)=>{
-        setState(tdata)
-        setLoading(false)
-      })
-      .catch((e) => {
-        console.log(e)
-      })
+      getGame(doRequest, timestamp)
+        .then((tdata) => {
+          setState(tdata)
+          setLoading(false)
+        })
+        .catch((e) => {
+          console.log(e)
+        })
     }
-  },[])
+  }, [])
   return !isAuth ? (
     <Redirect to="/" />
   ) : (

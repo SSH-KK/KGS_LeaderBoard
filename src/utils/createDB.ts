@@ -23,7 +23,7 @@ export const createDB: createDBT = () => {
       console.log('UPGRADE DB')
       const db = dbOpenRequest.result
       if (!db.objectStoreNames.contains('user')) {
-        db.createObjectStore('user', { keyPath: 'id', autoIncrement: true})
+        db.createObjectStore('user', { keyPath: 'id', autoIncrement: true })
       }
       if (!db.objectStoreNames.contains('top')) {
         db.createObjectStore('top', { keyPath: 'username' })
@@ -32,7 +32,10 @@ export const createDB: createDBT = () => {
         db.createObjectStore('game', { keyPath: 'timestamp' })
       }
       if (!db.objectStoreNames.contains('game_query')) {
-        db.createObjectStore('game_query', { keyPath: 'id',autoIncrement: true})
+        db.createObjectStore('game_query', {
+          keyPath: 'id',
+          autoIncrement: true,
+        })
       }
     }
 

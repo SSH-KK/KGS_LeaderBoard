@@ -17,7 +17,6 @@ module.exports = {
     '@snowpack/plugin-typescript',
     'snowpack-plugin-svgr',
   ],
-  routes: [{ match: 'routes', src: '.*', dest: '/index.html' }],
   routes: [
     {
       src: '/json-cors/access',
@@ -32,6 +31,7 @@ module.exports = {
         proxy.web(req, res)
       },
     },
+    { match: 'routes', src: '/.*', dest: '/index.html' },
   ],
   optimize: {
     bundle: true,

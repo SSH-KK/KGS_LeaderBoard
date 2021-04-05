@@ -21,6 +21,7 @@ export const useGame = (
   fetchedGame: IFetchedGame,
   setFullBoardState: SetFullBoardStateFT
 ): UseGameReturnT => {
+  console.log('Used useGame hook')
   const [loading, setLoading] = useState(true)
 
   const [steps, setSteps] = useState<GameStepT[]>([])

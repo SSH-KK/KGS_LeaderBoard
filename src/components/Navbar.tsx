@@ -28,7 +28,7 @@ const Navbar: React.FC<NavBarProps> = ({ isAuth, makeLogout }) => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav w-100 d-flex justify-content-between">
             <li className="nav-item">
               {isAuth ? (
                 <Link to="/top" className="nav-link">
@@ -40,9 +40,7 @@ const Navbar: React.FC<NavBarProps> = ({ isAuth, makeLogout }) => {
                 </Link>
               )}
             </li>
-          </ul>
-        </div>
-        {isAuth ? (
+            {isAuth ? (
           <button
             type="button"
             onClick={makeLogout}
@@ -53,6 +51,8 @@ const Navbar: React.FC<NavBarProps> = ({ isAuth, makeLogout }) => {
         ) : (
           ''
         )}
+          </ul>
+        </div>
       </div>
     </nav>
   )

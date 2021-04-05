@@ -1,9 +1,9 @@
 import { DownsteamMessage } from './messageTypes'
 
-export enum ReuestTypes {
+export enum RequestTypes {
   login = 'LOGIN',
   joinArchive = 'JOIN_ARCHIVE_REQUEST',
-  roomLoadGame = 'ROOM_LOAD_GAME'
+  roomLoadGame = 'ROOM_LOAD_GAME',
 }
 
 export enum ResponseTypes {
@@ -15,7 +15,7 @@ export enum ResponseTypes {
 }
 
 export type UpstreamRequest = {
-  type: ReuestTypes
+  type: RequestTypes
 }
 
 export type DownsteamResponse = {
@@ -62,7 +62,7 @@ export type IFetchedGameSummaryT = {
   gameType: string
   komi: number
   size: number
-  players:{
+  players: {
     white: PlayerT
     black: PlayerT
   }
@@ -85,14 +85,16 @@ export interface IFetchedGame {
 
 export type SgfPropT = {
   name: string
-  color:'black' | 'white'
-  loc:{
-    x:number
-    y:number
-  }|string
+  color: 'black' | 'white'
+  loc:
+    | {
+        x: number
+        y: number
+      }
+    | string
 }
 
 export type SgfEventT = {
   type: string
-  props:SgfPropT[]
+  props: SgfPropT[]
 }

@@ -3,16 +3,17 @@ import { GOKGS_URL } from '@config/webConfig'
 import {
   DownsteamResponse,
   LoginRequest,
-  ReuestTypes,
+  RequestTypes,
   UpstreamRequest,
 } from '@type/fetch'
 import { DownsteamMessage } from '@type/messageTypes'
 import { useCallback, useEffect, useState } from 'react'
 
-export type UseAPIReturnT = [
-  DownsteamMessage[],
-  <T extends UpstreamRequest>(msg: UpstreamRequest & T) => Promise<void>
-]
+export type DoRequest = <T extends UpstreamRequest>(
+  msg: UpstreamRequest & T
+) => Promise<void>
+
+export type UseAPIReturnT = DoRequest
 
 export const useAPI = (
   username: string,
@@ -20,7 +21,6 @@ export const useAPI = (
   reducer: (msg: DownsteamMessage) => void
 ): UseAPIReturnT => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [responsePull, setResponsePull] = useState<DownsteamMessage[]>([])
 
   const getDownstram = useCallback(async () => {
     try {
@@ -45,8 +45,8 @@ export const useAPI = (
     }
   }, [])
 
-  const doUpstream = useCallback(
-    async <T extends UpstreamRequest>(msg: UpstreamRequest & T) => {
+  const doUpstream = useCallback<DoRequest>(
+    async (msg) => {
       try {
         const res = await fetch(GOKGS_URL, {
           method: 'POST',
@@ -59,7 +59,7 @@ export const useAPI = (
         })
 
         if (res.status == 200) {
-          if (msg.type === ReuestTypes.login) {
+          if (msg.type === RequestTypes.login) {
             setIsLoggedIn(true)
             getDownstram()
           }
@@ -75,9 +75,9 @@ export const useAPI = (
   useEffect(() => {
     ;(async () => {
       try {
-        await set('timestamp_query',[])
+        await set('timestamp_query', [])
         await doUpstream<LoginRequest>({
-          type: ReuestTypes.login,
+          type: RequestTypes.login,
           name: username,
           password,
           locale: 'en_US',
@@ -86,5 +86,5 @@ export const useAPI = (
     })()
   }, [])
 
-  return [responsePull, doUpstream]
+  return doUpstream
 }

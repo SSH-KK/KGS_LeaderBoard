@@ -29,13 +29,13 @@ export const useGame = (
   const [currentStep, setCurrentStep] = useState(0)
 
   useEffect(() => {
-    if (createBoard(timestamp, fetchedGame.gameSummary.size))
+    if (createBoard(timestamp, fetchedGame.gameSummary.size, fetchedGame.events[0].color == 'black'))
       setSteps(() =>
         fetchedGame.events.map((event) => {
           const { color, position } = event
           const [x, y] = position as [number, number]
 
-          makeMove(timestamp, { coords: { x, y }, passing: false })
+          makeMove(timestamp, { coords: { x, y }, passing: false }, color)
 
           const boardState = getData(timestamp) as BoardData
 

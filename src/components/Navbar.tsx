@@ -4,7 +4,7 @@ import styles from '@styles/Navbar.module.css'
 
 type NavBarProps = {
   isAuth: boolean
-  makeLogout: (event: React.MouseEvent<HTMLButtonElement>) => void
+  makeLogout?: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 const Navbar: React.FC<NavBarProps> = ({ isAuth, makeLogout }) => {

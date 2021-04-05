@@ -1,4 +1,9 @@
-import { LastGameT, ResponseTypes, GameSummaryT, IFetchedGameSummaryT, SgfEventT } from './fetch'
+import {
+  LastGameT,
+  ResponseTypes,
+  IFetchedGameSummaryT,
+  SgfEventT,
+} from './fetch'
 
 export type DownsteamMessage = {
   type: ResponseTypes

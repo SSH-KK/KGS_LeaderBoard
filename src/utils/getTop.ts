@@ -1,8 +1,14 @@
-import { TOP_URL } from '@config/webConfig'
-import { putDBT } from '@type/db'
-import { TopUserInfoT } from '@type/top'
+import { get, set } from 'idb-keyval'
 
-export const getTop = async (addToDB: putDBT) => {
+import { TOP_URL } from '@config/webConfig'
+import { DoRequest } from '@hooks/useAPI'
+import { JoinArchiveRequest } from '@type/requests'
+import { SetTopFT, TopUserInfoT } from '@type/top'
+import { RequestTypes } from '@type/fetch'
+
+export const getTop = async (doRequest: DoRequest, setTop: SetTopFT) => {
+  setTop([])
+  console.log('Started top getting')
   const page = await fetch(TOP_URL, {
     method: 'GET',
     mode: 'cors',
@@ -25,7 +31,7 @@ export const getTop = async (addToDB: putDBT) => {
     )
   })
 
-  rows.forEach((row) => {
+  for (const row of rows) {
     if (row.children.item(1) && row.children.item(2)) {
       const user: TopUserInfoT = {
         place: parseInt(row.children.item(0)!.textContent!),
@@ -34,9 +40,18 @@ export const getTop = async (addToDB: putDBT) => {
         games: [],
       }
 
-      console.log(user.username, user)
+      const userInDB = await get<TopUserInfoT>(user.username)
 
-      addToDB('top', user)
+      if (!userInDB) set(user.username, user)
+
+      if (!userInDB || userInDB.games.length == 0) {
+        await doRequest<JoinArchiveRequest>({
+          type: RequestTypes.joinArchive,
+          name: user.username,
+        })
+      } else setTop((prev) => [...prev, userInDB])
     }
-  })
+  }
+
+  return 'Requested all data'
 }

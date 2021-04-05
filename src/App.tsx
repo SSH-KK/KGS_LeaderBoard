@@ -9,6 +9,7 @@ import { get, del } from 'idb-keyval'
 import Top from '@components/Top'
 import Navbar from '@components/Navbar'
 import { RequestTypes } from '@type/fetch'
+import GameView from '@components/GameView'
 
 export const App = () => {
   const [usersTop, setUsersTop] = useState<TopUserInfoT[]>([])
@@ -75,6 +76,11 @@ export const App = () => {
                 doRequest={doRequest}
               />
             )}
+          />
+          <Route
+            exact
+            path="/game/:game_timestamp"
+            render={({ match }) => <GameView doRequest={doRequest} isAuth={isLoggedIn} match={match} />}
           />
           <Route path="*" render={() => <h1>NOT FOUND</h1>} />
         </Switch>

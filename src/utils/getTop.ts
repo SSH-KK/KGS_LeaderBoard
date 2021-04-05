@@ -1,12 +1,9 @@
 import { TOP_URL } from '@config/webConfig'
 import { DoRequest } from '@hooks/useAPI'
 import { getDBT, putDBT } from '@type/db'
-import { RequestTypes } from '@type/fetch'
 import { JoinArchiveRequest } from '@type/requests'
 import { TopUserInfoT } from '@type/top'
-import Queue from 'async-await-queue'
-
-const queue = new Queue(1, 300)
+import { RequestTypes } from '@type/fetch'
 
 export const getTop = async (
   addToDB: putDBT,
@@ -46,28 +43,21 @@ export const getTop = async (
         games: [],
       }
 
-      console.log(user.username, user)
+      // const userInDB = await getFromDB<TopUserInfoT>('top', user.username)
 
-      const userInDB = await getFromDB<TopUserInfoT>('top', user.username)
+      // console.log('DB user response for fetch', userInDB)
 
-      if (!userInDB) addToDB('top', user)
+      // if (!userInDB) addToDB('top', user)
 
-      if (userInDB.games.length == 0 || !userInDB) {
-        const me = Symbol()
-
-        q.push(
-          queue
-            .wait(me, -1)
-            .then(() =>
-              doRequest<JoinArchiveRequest>({
-                type: RequestTypes.joinArchive,
-                name: user.username,
-              })
-            )
-            .catch((e) => console.log('doRequest Error', user.username, e))
-            .finally(() => queue.end(me))
-        )
-      }
+      // if (!userInDB || userInDB.games.length == 0) {
+      console.info('Started fetching', user.username)
+      await doRequest<JoinArchiveRequest>({
+        type: RequestTypes.joinArchive,
+        name: user.username,
+      })
+      // }
     }
   }
+
+  return 'Requested all data'
 }

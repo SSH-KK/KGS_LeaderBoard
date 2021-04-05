@@ -42,15 +42,12 @@ const useDB = () => {
 
   const getDB: getDBT = useCallback(
     (store_name, key) => {
-      console.log('Called getDB')
       return new Promise((resolve, reject) => {
         if (db) {
           const store = createDBStore(store_name)
           const store_request = store.get(key)
-          console.log('sent request for user data into db')
 
           store_request.onsuccess = () => {
-            console.log('Got data', store_request.result)
             resolve(store_request.result)
           }
 

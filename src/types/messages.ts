@@ -7,6 +7,7 @@ export type DownsteamMessage = {
 export type ArchiveJoinMessage = DownsteamMessage & {
   user: {
     name: string
+    rank: string
   }
   games: LastGameT[]
 }

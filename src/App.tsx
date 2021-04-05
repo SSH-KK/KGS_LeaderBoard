@@ -1,27 +1,42 @@
 import { useAPI } from '@hooks/useAPI'
 import { getTop } from '@utils/getTop'
 import useBD from '@hooks/useBD'
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { reducerConstructor } from '@utils/messageReducer'
+import { TopUserInfoT } from '@type/top'
 
 export const App = () => {
   const { connected, deleteDB, getDB, listDB, putDB } = useBD()
+  const [usersTop, setUsersTop] = useState<TopUserInfoT[]>([])
 
-  const reducer = useCallback(reducerConstructor({ get: getDB, put: putDB }), [
-    getDB,
-    putDB,
-  ])
+  const reducer = useCallback(
+    reducerConstructor({ get: getDB, put: putDB }, setUsersTop),
+    [getDB, putDB]
+  )
 
   const doRequest = useAPI('dm1sh', 'vp5s27', reducer)
 
   useEffect(() => {
     if (connected)
-      (async () => console.log(await getTop(putDB, getDB, doRequest)))()
+      (async () => console.warn(await getTop(putDB, getDB, doRequest)))()
   }, [connected])
 
   return (
     <div>
-      <ul></ul>
+      <span>{usersTop.length}</span>
+      <ul>
+        {usersTop.map((user) => (
+          <li key={user.username}>
+            {user.username}
+
+            <ul>
+              {user.games.map((game) => (
+                <li key={game.timestamp}>{game.timestamp}</li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

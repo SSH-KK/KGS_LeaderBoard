@@ -4,9 +4,8 @@ import { DownsteamMessage } from '@type/messages'
 import { LoginRequest } from '@type/requests'
 import { useCallback, useEffect, useState } from 'react'
 import throttle from 'fetch-throttle'
-import assert from 'assert'
 
-const fetchThrottle = throttle(fetch, 1, 1000)
+const fetchThrottle = throttle(fetch, 100, 200)
 
 export type DoRequest = <T extends UpstreamRequest>(
   msg: UpstreamRequest & T

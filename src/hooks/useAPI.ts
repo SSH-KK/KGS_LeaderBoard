@@ -3,32 +3,42 @@ import { DownsteamResponse, RequestTypes, UpstreamRequest } from '@type/fetch'
 import { DownsteamMessage } from '@type/messages'
 import { LoginRequest } from '@type/requests'
 import { useCallback, useEffect, useState } from 'react'
-import throttle from 'fetch-throttle'
+import { SetStateFT } from '@type/utils'
+import { get } from 'idb-keyval'
 
-const fetchThrottle = throttle(fetch, 100, 200)
-
-export type DoRequest = <T extends UpstreamRequest>(
+export type DoRequest = <T extends UpstreamRequest = UpstreamRequest>(
   msg: UpstreamRequest & T
 ) => Promise<void>
 
-export type UseAPIReturnT = DoRequest
+export type DoLogin = (username: string, password: string) => Promise<void>
+
+export type UseAPIReturnT = [DoLogin, DoRequest]
 
 export const useAPI = (
-  username: string,
-  password: string,
+  isLoggedIn: boolean,
+  setIsLoggedIn: SetStateFT<boolean>,
   reducer: (msg: DownsteamMessage) => void
 ): UseAPIReturnT => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [doneLogin, setDoneLogin] = useState(false)
 
   useEffect(() => {
-    if (isLoggedIn) getDownstram()
-  }, [isLoggedIn])
+    if (doneLogin) {
+      getDownstram()
+    } else if (isLoggedIn) {
+      ;(async () => {
+        const username = await get('user:login')
+        const password = await get('user:password')
+
+        if (username && password) doLogin(username, password)
+      })()
+    }
+  }, [doneLogin])
 
   const getDownstram = useCallback(async () => {
     try {
       console.log('Called getDownstream')
 
-      const res = await fetchThrottle(GOKGS_URL, {
+      const res = await fetch(GOKGS_URL, {
         mode: 'cors',
         method: 'GET',
       })
@@ -43,18 +53,18 @@ export const useAPI = (
 
         getDownstram()
       } else {
-        setIsLoggedIn(false)
+        setDoneLogin(false)
         throw new Error('LOGOUT')
       }
     } catch (err) {
       console.error(err.message)
-      if (err.message === 'LOGOUT') throw err
+      if (err.message === 'LOGOUT') setIsLoggedIn(false)
     }
   }, [])
 
   const doUpstream = useCallback<DoRequest>(async (msg) => {
     try {
-      const res = await fetchThrottle(GOKGS_URL, {
+      const res = await fetch(GOKGS_URL, {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
@@ -66,7 +76,7 @@ export const useAPI = (
 
       if (res.status == 200) {
         if (msg.type === RequestTypes.login) {
-          setIsLoggedIn(true)
+          getDownstram()
         }
       } else throw new Error(res.statusText)
     } catch (err) {
@@ -75,18 +85,16 @@ export const useAPI = (
     }
   }, [])
 
-  useEffect(() => {
-    ;(async () => {
-      try {
-        await doUpstream<LoginRequest>({
-          type: RequestTypes.login,
-          name: username,
-          password,
-          locale: 'en_US',
-        })
-      } catch (err) {}
-    })()
+  const doLogin = useCallback<DoLogin>(async (username, password) => {
+    try {
+      await doUpstream<LoginRequest>({
+        type: RequestTypes.login,
+        name: username,
+        password,
+        locale: 'en_US',
+      })
+    } catch (err) {}
   }, [])
 
-  return doUpstream
+  return [doLogin, doUpstream]
 }

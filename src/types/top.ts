@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction } from 'react'
 import { LastGameT } from './fetch'
+import { SetStateFT } from './utils'
 
 export type TopUserInfoT = {
   username: string
@@ -8,4 +8,4 @@ export type TopUserInfoT = {
   games: LastGameT[]
 }
 
-export type SetTopFT = Dispatch<SetStateAction<TopUserInfoT[]>>
+export type SetTopFT = SetStateFT<TopUserInfoT[]>

@@ -4,6 +4,7 @@ import styles from '@styles/Loader.module.css'
 type LoaderProps = {
   children?: React.ReactNode
   loading: boolean
+  fallbackMsg?: string
 }
 
 const Loader: React.FC<LoaderProps> = ({ loading, children }) => {

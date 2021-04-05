@@ -1,50 +1,66 @@
-import React, { useState, ChangeEvent } from 'react'
+import React, { useState, ChangeEvent, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
-import useHttp from '@hooks/useHttp'
 import styles from '@styles/Login.module.css'
+import { DoLogin } from '@hooks/useAPI'
+import { SetStateFT } from '@type/utils'
+import { set } from 'idb-keyval'
 
 type LoginProps = {
   isAuth: boolean
-  checkIsAuth: () => Promise<boolean>
+  doLogin: DoLogin
+  logInError: string | undefined
+  setLogInError: SetStateFT<string | undefined>
 }
 
-const Login: React.FC<LoginProps> = ({ isAuth, checkIsAuth }) => {
-  const { request, loading, error, setError } = useHttp()
-  const [fromState, setFormState] = useState({
+const Login: React.FC<LoginProps> = ({
+  isAuth,
+  doLogin,
+  logInError,
+  setLogInError,
+}) => {
+  // window.isAuth = isAuth
+
+  const [formState, setFormState] = useState({
     username: '',
     password: '',
   })
 
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if (loading) setLoading(false)
+    if (isAuth && formState.username && formState.password) {
+      set('user:login', formState.username)
+      set('user:password', formState.password)
+    }
+  }, [logInError, isAuth])
+
   const formSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
+
     try {
-      await request('/login', 'POST', JSON.stringify(fromState))
-      await new Promise((resolve) => setTimeout(resolve, 1000 * 1.5))
-      if (!(await checkIsAuth())) {
-        setFormState({
-          username: '',
-          password: '',
-        })
-        setError('Invalid login data')
-        throw new Error('Invalid login data')
-      }
+      doLogin(formState.username, formState.password)
+      setLoading(true)
     } catch (e) {
       setFormState({
         username: '',
         password: '',
       })
+
       console.log(e)
     }
   }
 
   const formInputchange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
+
     setFormState((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }))
-    if (error) {
-      setError(null)
+
+    if (logInError) {
+      setLogInError(undefined)
     }
   }
 
@@ -61,7 +77,7 @@ const Login: React.FC<LoginProps> = ({ isAuth, checkIsAuth }) => {
             <div className="input-group mb-3">
               <input
                 onChange={formInputchange}
-                value={fromState['username']}
+                value={formState['username']}
                 type="text"
                 className="form-control"
                 name="username"
@@ -72,7 +88,7 @@ const Login: React.FC<LoginProps> = ({ isAuth, checkIsAuth }) => {
             <div className="input-group mb-3">
               <input
                 onChange={formInputchange}
-                value={fromState['password']}
+                value={formState['password']}
                 type="password"
                 className="form-control"
                 name="password"
@@ -80,7 +96,7 @@ const Login: React.FC<LoginProps> = ({ isAuth, checkIsAuth }) => {
                 aria-label="Password"
               />
             </div>
-            {error ? <h5 className="text-danger">Error during login</h5> : ''}
+            {logInError ? <h5 className="text-danger">{logInError}</h5> : ''}
             <button
               disabled={loading}
               type="submit"

@@ -7,6 +7,8 @@ import { SetTopFT, TopUserInfoT } from '@type/top'
 import { RequestTypes } from '@type/fetch'
 
 export const getTop = async (doRequest: DoRequest, setTop: SetTopFT) => {
+  setTop([])
+  console.log('Started top getting')
   const page = await fetch(TOP_URL, {
     method: 'GET',
     mode: 'cors',

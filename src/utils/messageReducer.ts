@@ -1,12 +1,24 @@
 import { get, set } from 'idb-keyval'
 
-import { isArchiveJoin } from '@type/messageTypeChecker'
+import {
+  isArchiveJoin,
+  isLoginSuccess,
+  isNoSuchUser,
+  isWrongPassword,
+} from '@type/messageTypeChecker'
 import { DownsteamMessage } from '@type/messages'
 import { SetTopFT, TopUserInfoT } from '@type/top'
+import { SetStateFT } from '@type/utils'
 
-export const reducerConstructor = (archiveJoinMethods: {
-  setTopList: SetTopFT
-}) => {
+export const reducerConstructor = (
+  archiveJoinMethods: {
+    setTopList: SetTopFT
+  },
+  login: {
+    setLoginError: SetStateFT<string | undefined>
+    setIsLoggedIn: SetStateFT<boolean>
+  }
+) => {
   return async (message: DownsteamMessage) => {
     if (isArchiveJoin(message)) {
       const { setTopList } = archiveJoinMethods
@@ -33,5 +45,14 @@ export const reducerConstructor = (archiveJoinMethods: {
       set(composedUser.username, composedUser)
       setTopList((prev) => [...prev, composedUser])
     }
+
+    if (isNoSuchUser(message))
+      login.setLoginError(
+        'Нет такого пользователя, проверьте логин и попробуйте ещё раз'
+      )
+
+    if (isWrongPassword(message)) login.setLoginError('Неправильный пароль')
+
+    if (isLoginSuccess(message)) login.setIsLoggedIn(true)
   }
 }

@@ -1,5 +1,5 @@
 import { ResponseTypes } from './fetch'
-import { ArchiveJoinMessage, DownsteamMessage } from './messageTypes'
+import { ArchiveJoinMessage, DownsteamMessage } from './messages'
 
 export const isArchiveJoin = (
   msg: DownsteamMessage

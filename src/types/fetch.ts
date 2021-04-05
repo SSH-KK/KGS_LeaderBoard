@@ -1,7 +1,8 @@
-import { DownsteamMessage } from './messageTypes'
+import { DownsteamMessage } from './messages'
 
-export enum ReuestTypes {
+export enum RequestTypes {
   login = 'LOGIN',
+  joinArchive = 'JOIN_ARCHIVE_REQUEST',
 }
 
 export enum ResponseTypes {
@@ -12,17 +13,11 @@ export enum ResponseTypes {
 }
 
 export type UpstreamRequest = {
-  type: ReuestTypes
+  type: RequestTypes
 }
 
 export type DownsteamResponse = {
   messages: DownsteamMessage[]
-}
-
-export type LoginRequest = UpstreamRequest & {
-  name: string
-  password: string
-  locale?: string
 }
 
 export type LastGameT = {

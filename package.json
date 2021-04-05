@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "@types/styled-components": "^5.1.9",
+    "async-await-queue": "^1.1.1",
     "bootstrap": "^5.0.0-beta3",
     "bootstrap-icons": "^1.4.1",
     "chai": "^4.3.4",
+    "fetch-throttle": "^0.1.0",
     "http-proxy": "^1.18.1",
     "lint-staged": "^10.5.4",
     "react": "^17.0.0",

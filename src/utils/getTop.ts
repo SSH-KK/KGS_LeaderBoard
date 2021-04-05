@@ -1,8 +1,18 @@
 import { TOP_URL } from '@config/webConfig'
-import { putDBT } from '@type/db'
+import { DoRequest } from '@hooks/useAPI'
+import { getDBT, putDBT } from '@type/db'
+import { RequestTypes } from '@type/fetch'
+import { JoinArchiveRequest } from '@type/requests'
 import { TopUserInfoT } from '@type/top'
+import Queue from 'async-await-queue'
 
-export const getTop = async (addToDB: putDBT) => {
+const queue = new Queue(1, 300)
+
+export const getTop = async (
+  addToDB: putDBT,
+  getFromDB: getDBT,
+  doRequest: DoRequest
+) => {
   const page = await fetch(TOP_URL, {
     method: 'GET',
     mode: 'cors',
@@ -25,7 +35,9 @@ export const getTop = async (addToDB: putDBT) => {
     )
   })
 
-  rows.forEach((row) => {
+  const q = []
+
+  for (const row of rows) {
     if (row.children.item(1) && row.children.item(2)) {
       const user: TopUserInfoT = {
         place: parseInt(row.children.item(0)!.textContent!),
@@ -36,7 +48,26 @@ export const getTop = async (addToDB: putDBT) => {
 
       console.log(user.username, user)
 
-      addToDB('top', user)
+      const userInDB = await getFromDB<TopUserInfoT>('top', user.username)
+
+      if (!userInDB) addToDB('top', user)
+
+      if (userInDB.games.length == 0 || !userInDB) {
+        const me = Symbol()
+
+        q.push(
+          queue
+            .wait(me, -1)
+            .then(() =>
+              doRequest<JoinArchiveRequest>({
+                type: RequestTypes.joinArchive,
+                name: user.username,
+              })
+            )
+            .catch((e) => console.log('doRequest Error', user.username, e))
+            .finally(() => queue.end(me))
+        )
+      }
     }
-  })
+  }
 }

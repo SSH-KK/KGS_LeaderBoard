@@ -32,7 +32,7 @@ export const useGame = (
       setSteps(() =>
         fetchedGame.events.map((event) => {
           const { color, position } = event
-          const [x, y] = position
+          const [x, y] = position as [number, number]
 
           makeMove(timestamp, { coords: { x, y }, passing: false })
 

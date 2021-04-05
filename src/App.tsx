@@ -1,5 +1,6 @@
 import { useAPI } from '@hooks/useAPI'
 import { getTop } from '@utils/getTop'
+import { getGame } from '@utils/getGame'
 import useBD from '@hooks/useBD'
 import {getDBT, putDBT} from '@type/db'
 import React, { useEffect } from 'react'
@@ -10,14 +11,20 @@ export const App = () => {
 
   // const reducer = reducerConstructor({ get: getDB, put: putDB, all:listDB, dell:deleteDB })
 
-  // const [responsePull, doRequest] = useAPI('dm1sh', 'vp5s27', reducer)
+  const doRequest = useAPI('TUTOR03', 'z4bw4n', reducer)
 
   // useEffect(() => {
-  //   if (connected) (async () => console.log(await getTop(putDB)))()
+  //   if (connected)
+  //     (async () => console.warn(await getTop(doRequest, setUsersTop)))()
   // }, [connected])
 
   useEffect(() => {
-    if (connected) (async () => console.log(await listDB('user')))()
+    if (connected){
+      getGame(doRequest, '2020-10-03T11:15:00.331Z').then((data)=>{
+        console.log(data)
+      })
+      console.log('WAIT')
+    }
   }, [connected])
 
   return (

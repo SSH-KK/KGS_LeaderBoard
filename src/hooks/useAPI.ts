@@ -1,3 +1,4 @@
+import { set, get } from 'idb-keyval'
 import { GOKGS_URL } from '@config/webConfig'
 import {
   DownsteamResponse,
@@ -74,6 +75,7 @@ export const useAPI = (
   useEffect(() => {
     ;(async () => {
       try {
+        await set('timestamp_query',[])
         await doUpstream<LoginRequest>({
           type: ReuestTypes.login,
           name: username,

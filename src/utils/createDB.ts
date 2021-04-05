@@ -2,7 +2,7 @@ import { createDBT } from '@type/db'
 
 export const createDB: createDBT = () => {
   return new Promise((resolve, reject) => {
-    const dbOpenRequest = indexedDB.open('my_db', 7)
+    const dbOpenRequest = indexedDB.open('my_db', 6)
 
     dbOpenRequest.onblocked = () => {
       reject(

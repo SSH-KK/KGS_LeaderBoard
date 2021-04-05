@@ -26,13 +26,14 @@ const Top: React.FC<ITopProps> = ({ isAuth, doRequest, usersTop, setTop }) => {
 
   useEffect(() => {
     if (usersTop.length == 100) setFloaded(true)
+    else setFloaded(false)
     if (usersTop.length > 0) console.log('Loaded new top:', usersTop.slice(-1))
   }, [usersTop.length])
 
   return !isAuth ? (
     <Redirect to="/" />
   ) : (
-    <Loader loading={!floaded}>
+    <Loader loading={!floaded} statusMessage={`Loaded: ${usersTop.length}/100`}>
       <div className="container-md px-0 mt-md-3">
         <table className="table table-dark table-striped">
           <thead>

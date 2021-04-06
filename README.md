@@ -135,7 +135,7 @@
 В случае если вы хотите поднять свой экземпляр приложения, вам необходим установленный Docker:
 
 ```bash
-docker run -dp <Yur port>:5000 sshkk/gokgs-leaderboard:main
+docker run -dp <your port>:5000 sshkk/gokgs-leaderboard:main
 ```
 
 Данная команда запустит приложение в контейнере фоновом режиме.

@@ -36,7 +36,6 @@ export const useAPI = (
 
   const getDownstram = useCallback(async () => {
     try {
-      console.log('Called getDownstream')
 
       const res = await fetch(GOKGS_URL, {
         mode: 'cors',
@@ -57,7 +56,6 @@ export const useAPI = (
         throw new Error('LOGOUT')
       }
     } catch (err) {
-      console.error(err.message)
       if (err.message === 'LOGOUT') setIsLoggedIn(false)
     }
   }, [])

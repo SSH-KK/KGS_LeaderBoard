@@ -27,7 +27,7 @@ const Top: React.FC<ITopProps> = ({ isAuth, doRequest, usersTop, setTop }) => {
   useEffect(() => {
     if (usersTop.length == 100) setFloaded(true)
     else setFloaded(false)
-    if (usersTop.length > 0) console.log('Loaded new top:', usersTop.slice(-1))
+    // if (usersTop.length > 0) console.log('Loaded new top:', usersTop.slice(-1))
   }, [usersTop.length])
 
   return !isAuth ? (

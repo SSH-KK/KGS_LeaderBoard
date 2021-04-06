@@ -40,7 +40,6 @@ export const createDB: createDBT = () => {
     }
 
     dbOpenRequest.onsuccess = () => {
-      console.log('Successfully open indexedDB connection')
       resolve(dbOpenRequest.result)
     }
 

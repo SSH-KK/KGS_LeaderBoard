@@ -32,15 +32,12 @@ export const App = () => {
       const username = await get('user:login')
       const password = await get('user:password')
 
-      console.log(username, password)
-
       if (username && password) doLogin(username, password)
       else setFirstLoginProcessing(false)
     })()
   }, [])
 
   useEffect(() => {
-    console.log(logInError)
     if (logInError != undefined) setFirstLoginProcessing(false)
     if (isLoggedIn) {
       setFirstLoginProcessing(false)

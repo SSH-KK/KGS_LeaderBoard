@@ -1,3 +1,4 @@
 .fixedNav {
-  height: 7vh;
+  min-height: 7vh;
+  max-height: 18vh;
 }

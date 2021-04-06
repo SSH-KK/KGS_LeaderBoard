@@ -27,6 +27,7 @@
     "snowpack.config.js",
     ".github/",
     ".vscode/",
-    "build/"
+    "build/",
+    "server/"
   ]
 }

@@ -11,7 +11,7 @@
     "@types/styled-components": "^5.1.9",
     "bootstrap": "^5.0.0-beta3",
     "bootstrap-icons": "^1.4.1",
-    "lint-staged": "^10.5.4",
+    "idb-keyval": "^5.0.4",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-router-dom": "^5.2.0",
@@ -26,10 +26,7 @@
     "@storybook/addon-essentials": "^6.1.21",
     "@storybook/addon-links": "^6.1.21",
     "@storybook/react": "^6.1.21",
-    "@testing-library/react": "^11.0.0",
     "@types/bootstrap": "^5.0.9",
-    "@types/chai": "^4.2.13",
-    "@types/mocha": "^8.2.0",
     "@types/node": "^14.14.35",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
@@ -41,7 +38,9 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.23.1",
+    "http-proxy": "^1.18.1",
     "husky": "^6.0.0",
+    "lint-staged": "^10.5.4",
     "prettier": "^2.0.5",
     "snowpack": "^3.0.1",
     "snowpack-plugin-svgr": "^0.1.2",
@@ -54,5 +53,6 @@
       "eslint --fix"
     ],
     "*.{html,css}": "prettier --write"
-  }
+  },
+  "proxy": "https://www.gokgs.com"
 }

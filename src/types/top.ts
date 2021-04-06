@@ -1,8 +1,11 @@
 import { LastGameT } from './fetch'
+import { SetStateFT } from './utils'
 
-export type UserTopT = {
-  name: string
+export type TopUserInfoT = {
+  username: string
   rank: string
   place: number
-  last: LastGameT[]
+  games: LastGameT[]
 }
+
+export type SetTopFT = SetStateFT<TopUserInfoT[]>

@@ -1,21 +1,21 @@
-import { UserTopT } from '@type/top'
+import { TopUserInfoT } from '@type/top'
 import React from 'react'
 import styles from '@styles/Top.module.css'
 import { Link } from 'react-router-dom'
 
 export interface ITopLineProps {
-  user: UserTopT
+  user: TopUserInfoT
 }
 
 export const TopLine: React.FC<ITopLineProps> = ({ user }) => {
   return (
     <tr className="align-middle">
       <th className="fs-5">
-        {user.place}: {user.name}
+        {user.place}: {user.username}
       </th>
       <td>
         <div className="row">
-          {user.last.map((game) => (
+          {user.games.map((game) => (
             <Link
               key={game.timestamp}
               to={`/game/${btoa(game.timestamp)}`}

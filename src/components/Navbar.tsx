@@ -4,7 +4,7 @@ import styles from '@styles/Navbar.module.css'
 
 type NavBarProps = {
   isAuth: boolean
-  makeLogout: (event: React.MouseEvent<HTMLButtonElement>) => void
+  makeLogout?: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 const Navbar: React.FC<NavBarProps> = ({ isAuth, makeLogout }) => {
@@ -28,7 +28,7 @@ const Navbar: React.FC<NavBarProps> = ({ isAuth, makeLogout }) => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav w-100 d-flex justify-content-between">
             <li className="nav-item">
               {isAuth ? (
                 <Link to="/top" className="nav-link">
@@ -40,19 +40,19 @@ const Navbar: React.FC<NavBarProps> = ({ isAuth, makeLogout }) => {
                 </Link>
               )}
             </li>
+            {isAuth ? (
+              <button
+                type="button"
+                onClick={makeLogout}
+                className="btn btn-outline-danger"
+              >
+                Logout
+              </button>
+            ) : (
+              ''
+            )}
           </ul>
         </div>
-        {isAuth ? (
-          <button
-            type="button"
-            onClick={makeLogout}
-            className="btn btn-outline-danger"
-          >
-            Logout
-          </button>
-        ) : (
-          ''
-        )}
       </div>
     </nav>
   )

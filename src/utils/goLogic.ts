@@ -16,13 +16,20 @@ const py2jsData = (pyData: PyGameData | null): BoardData | null => {
   }
 }
 
-export const makeMove = (tid: string, move: MoveT | PassT): boolean | null =>
+export const makeMove = (
+  tid: string,
+  move: MoveT | PassT,
+  color: 'black' | 'white'
+): boolean | null =>
   move.passing
-    ? window.py.place(tid, -1, -1)
-    : window.py.place(tid, move.coords.x, move.coords.y)
+    ? window.py.place(tid, -1, -1, false)
+    : window.py.place(tid, move.coords.x, move.coords.y, color == 'black')
 
-export const createBoard = (tid: string, size = 19): BoardData | null =>
-  py2jsData(window.py.createBoard(tid, size))
+export const createBoard = (
+  tid: string,
+  size = 19,
+  color: boolean
+): BoardData | null => py2jsData(window.py.createBoard(tid, size, color))
 
 export const getData = (tid: string): BoardData | null =>
   py2jsData(window.py.getData(tid))

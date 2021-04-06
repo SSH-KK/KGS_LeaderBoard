@@ -1,5 +1,4 @@
 node_modules/
-snowpack.config.js
 .github/
 .vscode/
 .*rc

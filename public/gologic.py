@@ -27,9 +27,9 @@ class Group:
 
 
 class GoLogic(object):
-  def __init__(self, n=11):
+  def __init__(self, n=11, start_color):
     self.size = n
-    self.turn = BLACK
+    self.turn = start_color
     self.blocked_field = None
     self.has_passed = False
     self.game_over = False
@@ -85,7 +85,8 @@ class GoLogic(object):
     }
     return data
 
-  def place_stone(self, x, y):
+  def place_stone(self, x, y, color):
+    self.turn = color
     if self.game_over:
       return False
     if self.board[y][x] is not None:
@@ -126,7 +127,6 @@ class GoLogic(object):
         self.blocked_field = stone
     else:
       self.blocked_field = None
-    self.turn = not self.turn
     self.has_passed = False
     return True
 
@@ -138,18 +138,18 @@ class GoLogic(object):
 boards = {}
 
 
-def create_board(tid, n):
-  boards[tid] = GoLogic(n)
+def create_board(tid, n, color):
+  boards[tid] = GoLogic(n, color)
   return boards[tid].get_data()
 
 
-def place(tid, x, y):
+def place(tid, x, y, color):
   board = boards.get(tid)
   if not board:
     return None
   if x == -1 and y == -1:
     return board.passing()
-  return board.place_stone(x, y)
+  return board.place_stone(x, y, color)
 
 
 def get_data(tid):

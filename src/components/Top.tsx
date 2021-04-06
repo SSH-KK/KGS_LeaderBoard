@@ -1,47 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import { Redirect } from 'react-router-dom'
 
-import UseHttp from '@hooks/useHttp'
-import { UserTopT } from '@type/top'
+import { TopUserInfoT } from '@type/top'
 import Loader from '@components/Loader'
 import { TopLine } from './TopLine'
+import { DoRequest } from '@hooks/useAPI'
+import { getTop } from '@utils/getTop'
+import { SetStateFT } from '@type/utils'
 
 export interface ITopProps {
   isAuth: boolean
+  doRequest: DoRequest
+  usersTop: TopUserInfoT[]
+  setTop: SetStateFT<TopUserInfoT[]>
 }
 
-const Top: React.FC<ITopProps> = ({ isAuth }) => {
-  const [top, setTop] = useState<UserTopT[]>([])
+const Top: React.FC<ITopProps> = ({ isAuth, doRequest, usersTop, setTop }) => {
   const [floaded, setFloaded] = useState<boolean>(false)
-  const { request, loading, error } = UseHttp()
 
   useEffect(() => {
     if (isAuth) {
-      request<UserTopT[]>('/get_top', 'GET')
-        .then((tdata) => {
-          setTop(tdata)
-          setFloaded(true)
-        })
-        .catch((e) => {
-          console.log(e)
-        })
-
-      const getTop = setInterval(async () => {
-        const data = await request<UserTopT[]>('/get_top', 'GET')
-        if (data != top) {
-          setTop(data)
-        }
-      }, 1000 * 40)
-
-      return () => {
-        clearInterval(getTop)
-      }
+      getTop(doRequest, setTop)
     }
   }, [])
+
+  useEffect(() => {
+    if (usersTop.length == 100) setFloaded(true)
+    else setFloaded(false)
+    if (usersTop.length > 0) console.log('Loaded new top:', usersTop.slice(-1))
+  }, [usersTop.length])
+
   return !isAuth ? (
     <Redirect to="/" />
   ) : (
-    <Loader loading={!floaded && !error}>
+    <Loader loading={!floaded} statusMessage={`Loaded: ${usersTop.length}/100`}>
       <div className="container-md px-0 mt-md-3">
         <table className="table table-dark table-striped">
           <thead>
@@ -58,7 +50,10 @@ const Top: React.FC<ITopProps> = ({ isAuth }) => {
             </tr>
           </thead>
           <tbody>
-            {top && top.map((user) => <TopLine key={user.place} user={user} />)}
+            {top &&
+              usersTop.map((user) => (
+                <TopLine key={user.username} user={user} />
+              ))}
           </tbody>
         </table>
       </div>

@@ -20,7 +20,8 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
+    "noUnusedLocals": false,
     "allowSyntheticDefaultImports": true,
-    "types": ["node"]
+    "types": ["node", "mocha"]
   }
 }

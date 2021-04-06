@@ -10,16 +10,8 @@ COPY . .
 
 RUN yarn build
 
-FROM node:14-alpine
+FROM nginx:alpine
 
-WORKDIR /srv/app
+COPY --from=build /src/app/build /var/www/gokgs/html
 
-COPY package.prod.json package.json
-
-RUN npm install
-
-COPY --from=build /src/app/build ./build
-
-EXPOSE 5000
-
-CMD ["npm", "run", "start"]
+COPY nginx.conf /etc/nginx/conf.d/default.conf

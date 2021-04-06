@@ -3,3 +3,4 @@ node_modules/
 .storybook/
 .husky/
 .vscode/
+package-lock.json

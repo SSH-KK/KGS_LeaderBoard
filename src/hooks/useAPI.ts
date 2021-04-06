@@ -1,4 +1,4 @@
-import { set, get } from 'idb-keyval'
+import { get } from 'idb-keyval'
 import { GOKGS_URL } from '@config/webConfig'
 import { DownsteamResponse, RequestTypes, UpstreamRequest } from '@type/fetch'
 import { DownsteamMessage } from '@type/messages'

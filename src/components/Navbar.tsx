@@ -41,16 +41,16 @@ const Navbar: React.FC<NavBarProps> = ({ isAuth, makeLogout }) => {
               )}
             </li>
             {isAuth ? (
-          <button
-            type="button"
-            onClick={makeLogout}
-            className="btn btn-outline-danger"
-          >
-            Logout
-          </button>
-        ) : (
-          ''
-        )}
+              <button
+                type="button"
+                onClick={makeLogout}
+                className="btn btn-outline-danger"
+              >
+                Logout
+              </button>
+            ) : (
+              ''
+            )}
           </ul>
         </div>
       </div>

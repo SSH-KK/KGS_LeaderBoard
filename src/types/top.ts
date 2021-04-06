@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react'
 import { LastGameT } from './fetch'
 import { SetStateFT } from './utils'
 

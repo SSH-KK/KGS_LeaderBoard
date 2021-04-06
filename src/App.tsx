@@ -25,6 +25,8 @@ export const App = () => {
     []
   )
 
+  const [doLogin, doRequest] = useAPI(isLoggedIn, setIsLoggedIn, reducer)
+
   useEffect(() => {
     ;(async () => {
       const username = await get('user:login')
@@ -42,8 +44,6 @@ export const App = () => {
     if (logInError != undefined) setFirstLoginProcessing(false)
     if (isLoggedIn) setFirstLoginProcessing(false)
   }, [logInError, isLoggedIn])
-
-  const [doLogin, doRequest] = useAPI(isLoggedIn, setIsLoggedIn, reducer)
 
   const doLogout = () => {
     del('user:login')

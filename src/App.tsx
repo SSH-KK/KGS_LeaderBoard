@@ -42,7 +42,10 @@ export const App = () => {
   useEffect(() => {
     console.log(logInError)
     if (logInError != undefined) setFirstLoginProcessing(false)
-    if (isLoggedIn) setFirstLoginProcessing(false)
+    if (isLoggedIn) {
+      setFirstLoginProcessing(false)
+      doRequest({ type: RequestTypes.joinChannel, channelId: 5 })
+    }
   }, [logInError, isLoggedIn])
 
   const doLogout = () => {

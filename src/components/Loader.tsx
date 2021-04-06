@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '@styles/Loader.module.css'
+import '@styles/Loader.css'
 
 type LoaderProps = {
   children?: React.ReactNode
@@ -17,10 +17,10 @@ const Loader: React.FC<LoaderProps> = ({
     <>
       {loading ? (
         <div
-          className={`${styles.customContainer} flex-column container-fluid align-items-center justify-content-center d-flex`}
+          className={`customContainer flex-column container-fluid align-items-center justify-content-center d-flex`}
         >
           <div
-            className={`spinner-border text-dark ${styles.loader}`}
+            className={`spinner-border text-dark loader`}
             role="status"
           >
             <span className="visually-hidden"></span>

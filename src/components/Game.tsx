@@ -4,7 +4,7 @@ import { useBoardState } from '@hooks/useBoardState'
 import { useGame } from '@hooks/useGame'
 import { IFetchedGame } from '@type/fetch'
 import { Board } from '@components/Board'
-import styles from '@styles/Game.module.css'
+import '@styles/Game.css'
 
 import LeftArrow from '@icons/LeftArrow.svg'
 import RightArrow from '@icons/RightArrow.svg'
@@ -45,8 +45,8 @@ export const Game = (args: IGameProps) => {
     <Loader loading={loading}>
       <div className="container-fluid">
         <div className="row">
-          <div className={`${styles.customCol} col-md-9`}>
-            <div className={`${styles.boardContaier} mx-auto`}>
+          <div className={`customCol col-md-9`}>
+            <div className={`boardContaier mx-auto`}>
               <Board
                 size={fetchedState.gameSummary.size}
                 state={board}
@@ -54,7 +54,7 @@ export const Game = (args: IGameProps) => {
               />
             </div>
           </div>
-          <div className={`${styles.bgMain} col-md-3`}>
+          <div className={`bgMain col-md-3`}>
             <h4 className="text-white"> Game menu:</h4>
             <div className="row">
               <div className="col-12 py-3">
@@ -106,8 +106,8 @@ export const Game = (args: IGameProps) => {
                 </div>
               </div>
               <span className="text-white fs-5 mb-2">Game step info:</span>
-              <div className={`col-12 ${styles.scrollMenu}`}>
-                <div className={styles.scrollContent}>
+              <div className={`col-12 scrollMenu`}>
+                <div className='scrollContent'>
                   <Steps currentStep={currentStep} steps={steps} />
                 </div>
               </div>

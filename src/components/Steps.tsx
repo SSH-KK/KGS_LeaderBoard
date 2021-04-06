@@ -2,7 +2,7 @@ import { ALPHABET_START_CHAR } from '@config/boardConfig'
 import { IntersectionState } from '@type/board'
 import { GameStepT } from '@type/game'
 import React, { createRef, useEffect } from 'react'
-import styles from '@styles/Game.module.css'
+import '@styles/Game.css'
 
 export interface IStepsProps {
   currentStep: number
@@ -27,7 +27,7 @@ export const Steps = ({ currentStep, steps }: IStepsProps) => {
   return (
     <div
       ref={scrollMenu}
-      className={`d-flex flex-column text-secondary ${styles.roundedMenu}`}
+      className={`d-flex flex-column text-secondary roundedMenu`}
     >
       {steps
         .slice()
@@ -40,7 +40,7 @@ export const Steps = ({ currentStep, steps }: IStepsProps) => {
                 index != steps.length - 1 ? 'border-bottom border-2' : ''
               } text-center ${
                 index === steps.length - currentStep - 1
-                  ? `${styles.activeInfo}`
+                  ? `activeInfo`
                   : 'bg-light'
               }`}
             >

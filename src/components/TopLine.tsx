@@ -1,6 +1,6 @@
 import { TopUserInfoT } from '@type/top'
 import React from 'react'
-import styles from '@styles/Top.module.css'
+import '@styles/Top.css'
 import { Link } from 'react-router-dom'
 
 export interface ITopLineProps {
@@ -19,18 +19,18 @@ export const TopLine: React.FC<ITopLineProps> = ({ user }) => {
             <Link
               key={game.timestamp}
               to={`/game/${btoa(game.timestamp)}`}
-              className={`${styles.hoveredLink} link-light text-decoration-none`}
+              className={`hoveredLink link-light text-decoration-none`}
             >
               <div className="col-12 text-center">
                 <span className="m-0 fs-5">
                   {game.players.white.name} ({game.players.white.rank})&nbsp;
                   <div
-                    className={`${styles.circleDot} ${styles.circleWhite}`}
+                    className={`circleDot circleWhite`}
                   ></div>
                   &nbsp;/&nbsp;
                   {game.players.black.name} ({game.players.black.rank})&nbsp;
                   <div
-                    className={`${styles.circleDot} ${styles.circleBlack}`}
+                    className={`circleDot circleBlack`}
                   ></div>
                   &nbsp; score: {game.score}&nbsp;
                   {game.size}x{game.size}

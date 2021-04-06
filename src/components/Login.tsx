@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
-import styles from '@styles/Login.module.css'
+import '@styles/Login.css'
 import { DoLogin } from '@hooks/useAPI'
 import { SetStateFT } from '@type/utils'
 import { set } from 'idb-keyval'
@@ -68,7 +68,7 @@ const Login: React.FC<LoginProps> = ({
     <Redirect to="/top" />
   ) : (
     <div
-      className={`${styles.fullHeightContainer} d-flex flex-column justify-content-center container`}
+      className={`fullHeightContainer d-flex flex-column justify-content-center container`}
     >
       <div className="row justify-content-center">
         <div className="col-md-6 shadow rounded rounded-3 p-5">

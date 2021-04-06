@@ -5,6 +5,7 @@ export enum RequestTypes {
   joinArchive = 'JOIN_ARCHIVE_REQUEST',
   roomLoadGame = 'ROOM_LOAD_GAME',
   logout = 'LOGOUT',
+  joinChannel = 'JOIN_REQUEST'
 }
 
 export enum ResponseTypes {

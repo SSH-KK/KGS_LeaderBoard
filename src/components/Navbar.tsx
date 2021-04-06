@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import styles from '@styles/Navbar.module.css'
+import '@styles/Navbar.css'
 
 type NavBarProps = {
   isAuth: boolean
@@ -10,7 +10,7 @@ type NavBarProps = {
 const Navbar: React.FC<NavBarProps> = ({ isAuth, makeLogout }) => {
   return (
     <nav
-      className={`${styles.fixedNav} navbar navbar-expand-md navbar-dark bg-dark`}
+      className={`fixedNav navbar navbar-expand-md navbar-dark bg-dark`}
     >
       <div className="container-fluid">
         <Link to="/" className="navbar-brand fw-bold">

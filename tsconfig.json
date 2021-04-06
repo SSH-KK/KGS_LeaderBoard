@@ -22,6 +22,6 @@
     "resolveJsonModule": true,
     "noUnusedLocals": false,
     "allowSyntheticDefaultImports": true,
-    "types": ["node", "mocha"]
+    "types": ["node"]
   }
 }

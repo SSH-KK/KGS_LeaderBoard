@@ -10,7 +10,7 @@ export const getTop = async (doRequest: DoRequest, setTop: SetTopFT) => {
   setTop([])
   const page = await fetch(TOP_URL, {
     method: 'GET',
-    mode: 'cors',
+    mode: 'same-origin',
     headers: {
       Accept: 'text/html',
     },

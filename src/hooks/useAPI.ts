@@ -36,9 +36,8 @@ export const useAPI = (
 
   const getDownstram = useCallback(async () => {
     try {
-
       const res = await fetch(GOKGS_URL, {
-        mode: 'cors',
+        mode: 'same-origin',
         method: 'GET',
       })
 
@@ -64,7 +63,7 @@ export const useAPI = (
     try {
       const res = await fetch(GOKGS_URL, {
         method: 'POST',
-        mode: 'cors',
+        mode: 'same-origin',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json;charset=UTF-8',
